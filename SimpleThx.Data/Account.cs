@@ -7,12 +7,27 @@ using System.Threading.Tasks;
 
 namespace SimpleThx.Data
 {
+
+    public enum State
+    {
+        IN = 1,
+        AR
+    }
+
+    public enum Country
+    {
+        USA = 1 ,
+
+    }
+
+
     public class Account
     {
         [Key]
         public int AccountID { get; set; }
 
-        public int UserID { get; set; }
+        [Required]
+        public Guid UserID { get; set; }
 
         [Required]
         public  string FirstName { get; set; }
@@ -21,10 +36,10 @@ namespace SimpleThx.Data
         public string LastName { get; set; }
 
         [Required]
-        public Enum State { get; set; }
+        public State State { get; set; }
 
         [Required]
-        public Enum Country { get; set; }
+        public Country Country { get; set; }
 
         public string PictureURL { get; set; }
 
@@ -32,5 +47,9 @@ namespace SimpleThx.Data
 
         public DateTimeOffset? ModifiedUTC { get; set; }
 
-    }
-}
+        // Foreign Key(s)
+
+        
+
+    } // END Account Class
+} // END Namespace
