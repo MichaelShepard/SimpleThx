@@ -54,11 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountInfoService.cs" />
+    <Compile Include="PostService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleThx.Data\SimpleThx.Data.csproj">
+      <Project>{356decca-8364-4c68-bbe2-ddfd6a338962}</Project>
+      <Name>SimpleThx.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleThx.Models\SimpleThx.Models.csproj">
+      <Project>{8ceaa882-2760-4064-8094-457d500e43a9}</Project>
+      <Name>SimpleThx.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

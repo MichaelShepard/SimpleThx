@@ -8,20 +8,8 @@ using System.Threading.Tasks;
 namespace SimpleThx.Data
 {
 
-    public enum State
-    {
-        IN = 1,
-        AR
-    }
 
-    public enum Country
-    {
-        USA = 1 ,
-
-    }
-
-
-    public class Account
+    public class AccountInfo
     {
         [Key]
         public int AccountID { get; set; }
@@ -36,10 +24,10 @@ namespace SimpleThx.Data
         public string LastName { get; set; }
 
         [Required]
-        public State State { get; set; }
+        public string State { get; set; }
 
         [Required]
-        public Country Country { get; set; }
+        public string Country { get; set; }
 
         public string PictureURL { get; set; }
 

@@ -10,8 +10,10 @@ namespace SimpleThx.Data
 
     public enum FriendStatus
     {
-        Accept = 1 ,
-        Decline
+        Accepted = 1 ,
+        Declined,
+        Waiting
+        
     }
 
 

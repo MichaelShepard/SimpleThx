@@ -54,11 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountInfoCreate.cs" />
+    <Compile Include="AccountInfoEdit.cs" />
+    <Compile Include="AccountInfoList.cs" />
+    <Compile Include="FriendCreate.cs" />
+    <Compile Include="FriendList.cs" />
+    <Compile Include="PostCreate.cs" />
+    <Compile Include="PostList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleThx.Data\SimpleThx.Data.csproj">
+      <Project>{356DECCA-8364-4C68-BBE2-DDFD6A338962}</Project>
+      <Name>SimpleThx.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
