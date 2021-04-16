@@ -14,7 +14,9 @@ namespace SimpleThx.Models
         public int FriendID { get; set; }
 
         
-        public Guid AccountID { get; set; }
+        public Guid FriendReceive { get; set; } // person who receives the request
+
+        public Guid FriendSend { get; set; } // person who sends request
 
     
         public FriendStatus Status { get; set; }

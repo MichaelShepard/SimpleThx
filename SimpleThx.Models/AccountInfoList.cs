@@ -25,8 +25,9 @@ namespace SimpleThx.Models
         [MaxLength(2, ErrorMessage = "Please Enter in Two Letters")]
         public string State { get; set; }
 
-       
         public string Country { get; set; }
+
+        public string PictureURL { get; set; }
 
         [DisplayName("Created")]
         public DateTimeOffset CreateUTC { get; set; }

@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateFriend")
+    @Html.ActionLink("Find Friend", "SearchForFriends")
 </p>
 <table class="table">
     <tr>
@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.FriendID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountID)
+            @Html.DisplayNameFor(model => model.FriendSend)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateUTC)
@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.FriendID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AccountID)
+            @Html.DisplayFor(modelItem => item.FriendSend)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreateUTC)

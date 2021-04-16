@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SimpleThx.Models.AccountInfoList>
+
+@{
+    ViewBag.Title = "SearchForFriends";
+}
+
+<h2>Search For Friends</h2>
+
+<form asp-controller="FriendController" asp-action="SearchForFriends" method="get">
+    <p>
+        Last Name: <input type="text" name="SearchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+
+<table class="table">
+    <tr>
+        
+        
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Connect", "Edit", new { /* id=item.PrimaryKey */ }) 
+            
+        </td>
+    </tr>
+}
+
+</table>

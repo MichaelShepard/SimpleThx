@@ -1,7 +1,10 @@
-﻿using SimpleThx.Models;
+﻿using Microsoft.AspNet.Identity;
+using SimpleThx.Models;
+using SimpleThx.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,33 +18,62 @@ namespace SimpleThx.webmvc.Controllers
         public ActionResult Index()
         {
 
-            var model = new FriendList[0];
+            var service = CreateFriendService();
+            var model = service.GetFriends();
+            
+           
             return View(model);
         }
 
-
-        // GET: Create Friend View
-
-        public ActionResult CreateFriend()
+        public ActionResult SearchForFriends(string searchString)
         {
-            return View();
+
+            var service = CreateFriendService();
+            var model = service.FriendSearch(searchString);
+
+            return View(model);
         }
 
-        // POST: Create Friend 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateFriend(FriendCreate model)
+        public ActionResult ConnectFriends(FriendCreate model)
         {
-            if(ModelState.IsValid)
-            {
 
+            if (!ModelState.IsValid)
+            {
+                return View(model);
             }
 
+            var service = CreateFriendService();
+
+            if (service.AddConnectionWithFriend(model))
+
+            {
+                TempData["SaveResult"] = "Your connection has been made";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Connection could not be made.");
+
             return View(model);
+
+
         }
 
 
 
+
+
+            // Helper
+
+            private FriendService CreateFriendService()
+        {
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new FriendService(userId);
+            return service;
+
+        }
 
 
     } // END Friend Controller
