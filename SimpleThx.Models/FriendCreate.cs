@@ -16,7 +16,6 @@ namespace SimpleThx.Models
 
         public FriendStatus Status { get; set; }
 
-      
         public DateTimeOffset CreateUTC { get; set; }
     }
 }

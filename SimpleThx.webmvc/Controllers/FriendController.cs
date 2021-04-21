@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using SimpleThx.Data;
 using SimpleThx.Models;
 using SimpleThx.Services;
 using System;
@@ -25,6 +26,18 @@ namespace SimpleThx.webmvc.Controllers
             return View(model);
         }
 
+
+        public ActionResult getFriendByID(int id)
+        {
+
+            var service = CreateFriendService();
+            var model = service.GetFriendByID(id);
+
+
+            return View(model);
+        }
+
+
         public ActionResult SearchForFriends(string searchString)
         {
 
@@ -34,39 +47,88 @@ namespace SimpleThx.webmvc.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ConnectFriends(FriendCreate model)
+        public ActionResult ConnectFriends(int id)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             var service = CreateFriendService();
+            var model = service.CreatesFriendListModel(id);
+            
 
-            if (service.AddConnectionWithFriend(model))
-
+            if (service.PostConnection(model))
             {
-                TempData["SaveResult"] = "Your connection has been made";
+                TempData["SaveResult"] = "Your connection was created.";
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "Connection could not be made.");
+            ModelState.AddModelError("", "You were not connected.");
 
             return View(model);
+        }
 
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ConnectFriendsPost(FriendList model)
+        //{
+
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+
+        //    }
+
+        //    var service = CreateFriendService();
+
+
+        //    if (service.PostConnection(model))
+        //    {
+        //        TempData["SaveResult"] = "Your connection was created.";
+        //        return new RedirectResult("Index");
+        //    };
+
+        //    ModelState.AddModelError("", "You were not connected.");
+
+        //    return View(model);
+
+
+
+
+        //}
+
+        public ActionResult UpdateFriend(int id, int status)
+        {
+            var service = CreateFriendService();
+            var model = service.GetFriendListModel(id);
+
+            FriendStatus newStatus = FriendStatus.Pending;
+
+            if(status == 1) {
+
+                newStatus = FriendStatus.Accepted;
+
+            } else if (status == 2) {
+
+                newStatus = FriendStatus.Declined;
+
+            }
+
+            
+            if (service.PostUpdateFriend(model, newStatus))
+            {
+                TempData["SaveResult"] = "Your connection was created.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "You were not connected.");
+
+            return View(model);
         }
 
 
 
+        // Helper
 
-
-            // Helper
-
-            private FriendService CreateFriendService()
+        private FriendService CreateFriendService()
         {
 
             var userId = Guid.Parse(User.Identity.GetUserId());

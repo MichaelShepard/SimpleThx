@@ -24,9 +24,9 @@ namespace SimpleThx.Data
         public int FriendID { get; set; }
 
         [Required]
-
         public Guid FriendReceive { get; set; } // person who receives the request
 
+        [Required]
         public Guid FriendSend { get; set; } // person who sends request
 
         [Required]
@@ -40,9 +40,8 @@ namespace SimpleThx.Data
 
         // Foreign Key(s)
 
-        
+        public virtual ICollection<AccountInfo> Accounts { get; set; }
 
-        public int FreindsUserID { get; set; }
 
     } // END Friend Class
 } // END Namespace

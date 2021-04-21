@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,9 +36,13 @@ namespace SimpleThx.Data
 
         public DateTimeOffset? ModifiedUTC { get; set; }
 
+
         // Foreign Key(s)
+        
+        public virtual ICollection<Friend> Friends { get; set; }
 
         
+
 
     } // END Account Class
 } // END Namespace
