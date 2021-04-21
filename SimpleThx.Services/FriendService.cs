@@ -20,7 +20,6 @@ namespace SimpleThx.Services
             _userID = userID;
         }
 
-
         public IEnumerable<FriendList> GetFriends()
         {
             using (var ctx = new ApplicationDbContext())
@@ -28,12 +27,14 @@ namespace SimpleThx.Services
 
                 var query = from e in ctx.Friends
 
-                .Where(e => e.FriendSend == _userID  && e.Status != FriendStatus.Declined)
-                join d in ctx.Accounts on e.FriendReceive equals d.UserID
+                .Where(e => e.FriendReceive == _userID  && e.Status != FriendStatus.Declined)
+                join d in ctx.Accounts on e.FriendSend equals d.UserID
                 select new FriendList
                 {
                     FriendID = e.FriendID,
                     FullName = d.FirstName + " " + d.LastName,
+                    State = d.State,
+                    Country = d.Country,
                     FriendReceive = e.FriendReceive,
                     Status = e.Status,
                     CreateUTC = e.CreateUTC
@@ -79,7 +80,7 @@ namespace SimpleThx.Services
             }
         }
 
-
+        // This search function returns all accounts without excluding the ones already connected with
         //public IEnumerable<AccountInfoList> FriendSearch(string searchString)
         //{
         //    using (var ctx = new ApplicationDbContext())
@@ -105,6 +106,26 @@ namespace SimpleThx.Services
 
         //    }
         //}
+
+
+        // Miscellanous tries on the search to exclude users already connected with 
+
+        //from e in ctx.Accounts
+
+
+        //.Where(e => ctx.Friends.All(y => y.FriendReceive == e.UserID))
+
+        //from e in ctx.Accounts
+        //        join p in cx.Friends ctx.Friends on e.UserID equals p.
+        //        where ctx.Friends.Any(b => b.Status == null)
+        //.Where(e => e.UserID != _userID)
+
+        //where !(from o in ctx.Friends
+        //        select o.FriendSend)
+        //        .Contains(e.UserID)
+        //select new AccountInfoList
+        // .Where(e=> e.UserID = )
+
 
         public IEnumerable<AccountInfoList> FriendSearch(string searchString)
         {
@@ -133,26 +154,6 @@ namespace SimpleThx.Services
             }
         }
 
-
-        // Miscellanous tries on the serach 
-
-        //from e in ctx.Accounts
-
-
-        //.Where(e => ctx.Friends.All(y => y.FriendReceive == e.UserID))
-
-        //from e in ctx.Accounts
-        //        join p in cx.Friends ctx.Friends on e.UserID equals p.
-        //        where ctx.Friends.Any(b => b.Status == null)
-        //.Where(e => e.UserID != _userID)
-
-        //where !(from o in ctx.Friends
-        //        select o.FriendSend)
-        //        .Contains(e.UserID)
-        //select new AccountInfoList
-        // .Where(e=> e.UserID = )
-
-
         public FriendList CreatesFriendListModel(int id)
         {
 
@@ -170,7 +171,7 @@ namespace SimpleThx.Services
             return entity;
         }
 
-       //  need anothermethod to add the service
+       
 
         public bool PostConnection(FriendList model)
         {
@@ -191,8 +192,7 @@ namespace SimpleThx.Services
 
         public FriendList GetFriendListModel(int id)
         {
-
-            
+          
             using (var ctx = new ApplicationDbContext()) 
             {
                 var entity = ctx.Friends

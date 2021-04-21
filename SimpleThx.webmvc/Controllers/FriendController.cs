@@ -65,36 +65,6 @@ namespace SimpleThx.webmvc.Controllers
         }
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ConnectFriendsPost(FriendList model)
-        //{
-
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-
-        //    }
-
-        //    var service = CreateFriendService();
-
-
-        //    if (service.PostConnection(model))
-        //    {
-        //        TempData["SaveResult"] = "Your connection was created.";
-        //        return new RedirectResult("Index");
-        //    };
-
-        //    ModelState.AddModelError("", "You were not connected.");
-
-        //    return View(model);
-
-
-
-
-        //}
-
         public ActionResult UpdateFriend(int id, int status)
         {
             var service = CreateFriendService();
@@ -126,7 +96,7 @@ namespace SimpleThx.webmvc.Controllers
 
 
 
-        // Helper
+        // Helper Methods
 
         private FriendService CreateFriendService()
         {
