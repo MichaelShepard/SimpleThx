@@ -55,11 +55,11 @@ namespace SimpleThx.webmvc.Controllers
 
             if (service.PostConnection(model))
             {
-                TempData["SaveResult"] = "Your connection was created.";
+                TempData["SaveResult"] = "Your connection was sent.";
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "You were not connected.");
+            ModelState.AddModelError("", "Sorry something went wrong. Please try again.");
 
             return View(model);
         }
@@ -115,11 +115,11 @@ namespace SimpleThx.webmvc.Controllers
             
             if (service.PostUpdateFriend(model, newStatus))
             {
-                TempData["SaveResult"] = "Your connection was created.";
+                TempData["SaveResult"] = "You are connected";
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "You were not connected.");
+            ModelState.AddModelError("", "Sorry something went wrong. Please try again.");
 
             return View(model);
         }

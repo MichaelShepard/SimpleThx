@@ -27,9 +27,7 @@
         <th>
             @Html.DisplayNameFor(model => model.FullName)
         </th>
-        
-
-        <th>
+         <th>
             @Html.DisplayNameFor(model => model.Status)
 
         </th>
@@ -54,13 +52,11 @@
     <td>
         @Html.DisplayFor(modelItem => item.FullName)
     </td>
-
-
     <td>
         @Html.DisplayFor(modelItem => item.Status)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.CreateUTC)
+        <a>Friends since </a>@Html.DisplayFor(modelItem => item.CreateUTC)
     </td>
 
     <td>
@@ -81,8 +77,6 @@
         }
         
 
-
-
     </td>
     <td>
         @if (item.FriendSend != item.UserID)
@@ -91,11 +85,7 @@
             {
                 <input type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 2 }))'" />
             }
-            else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
-            {
-
-
-            }
+            
 
         }
         </td>

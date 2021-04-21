@@ -28,7 +28,7 @@ namespace SimpleThx.Services
 
                 var query = from e in ctx.Friends
 
-                .Where(e => e.FriendSend == _userID)
+                .Where(e => e.FriendSend == _userID  && e.Status != FriendStatus.Declined)
                 join d in ctx.Accounts on e.FriendReceive equals d.UserID
                 select new FriendList
                 {
