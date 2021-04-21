@@ -12,7 +12,7 @@ namespace SimpleThx.Data
     {
         Accepted = 1 ,
         Declined,
-        Waiting
+        Pending
         
     }
 
@@ -24,7 +24,10 @@ namespace SimpleThx.Data
         public int FriendID { get; set; }
 
         [Required]
-        public Guid AccountID { get; set; }
+        public Guid FriendReceive { get; set; } // person who receives the request
+
+        [Required]
+        public Guid FriendSend { get; set; } // person who sends request
 
         [Required]
         public FriendStatus Status { get; set; }
@@ -37,9 +40,8 @@ namespace SimpleThx.Data
 
         // Foreign Key(s)
 
-        
+        public virtual ICollection<AccountInfo> Accounts { get; set; }
 
-        public int FreindsUserID { get; set; }
 
     } // END Friend Class
 } // END Namespace

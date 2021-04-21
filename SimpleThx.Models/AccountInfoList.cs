@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleThx.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,9 @@ namespace SimpleThx.Models
 
         public Guid UserID { get; set; }
 
+        [Display(Name = "Name")]
+        public string FullName { get; set; }
+
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
@@ -25,8 +29,12 @@ namespace SimpleThx.Models
         [MaxLength(2, ErrorMessage = "Please Enter in Two Letters")]
         public string State { get; set; }
 
-       
         public string Country { get; set; }
+
+        public string PictureURL { get; set; }
+
+        [DisplayName("Status")]
+        public FriendStatus Status { get; set; }
 
         [DisplayName("Created")]
         public DateTimeOffset CreateUTC { get; set; }
