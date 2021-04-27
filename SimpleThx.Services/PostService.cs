@@ -18,7 +18,20 @@ namespace SimpleThx.Services
             _userID = userID;
         }
 
-        public bool CreatePost (PostCreate model)
+        // Create model to be used in Create Method; Need to do this because I am brining over the ID
+        public PostCreate PostModelCreate(PostCreate model, Guid id)
+        {
+
+            model.PostUserID = _userID;
+            model.AboutUserID = id;
+            model.Status = Status.Pending;
+            model.CreateUTC = DateTimeOffset.Now;
+            
+            return model;
+        }
+
+
+        public bool CreatePost(PostCreate model)
         {
             var entity = new Post()
             {
@@ -26,7 +39,7 @@ namespace SimpleThx.Services
                 AboutUserID = model.AboutUserID,
                 Title = model.Title,
                 Content = model.Content,
-                Status = model.Status,
+                Status = Status.Pending,
                 CreateUTC = DateTimeOffset.Now
             };
 
@@ -36,7 +49,6 @@ namespace SimpleThx.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-
 
         public IEnumerable<PostList> GetPosts()
         {
@@ -50,6 +62,9 @@ namespace SimpleThx.Services
                     {
                         PostID = e.PostID,
                         Title = e.Title,
+                        Content = e.Content,
+                        CreateUTC = e.CreateUTC,
+                        Status = e.Status
                 
                     });
 
@@ -57,6 +72,8 @@ namespace SimpleThx.Services
             }
 
         }
+
+
 
 
     } // END Post Service

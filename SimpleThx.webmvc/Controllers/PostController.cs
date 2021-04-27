@@ -24,27 +24,29 @@ namespace SimpleThx.webmvc.Controllers
         // GET: Create Account Info Page
         public ActionResult CreatePost()
         {
+            
             return View();
+            
+            
+           
         }
+
 
         // POST: 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult CreatePost(PostCreate model)
+        public ActionResult CreatePost(PostCreate model, Guid id)
         {
-
-            if (ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             var service = CreatePostService();
+            var entity = service.PostModelCreate(model, id);
 
 
-            if (service.CreatePost(model))
+            //var service = CreatePostService();
+
+            if (service.CreatePost(entity))
             {
-                ViewBag.SaveResult = "Your Account info was created!";
+                ViewBag.SaveResult = "You Posted!";
                 return RedirectToAction("Index");
             }
 
@@ -62,7 +64,7 @@ namespace SimpleThx.webmvc.Controllers
             var service = new PostService(userId);
             return service;
         }
-
+        
 
     } // END Post Controller
 } // END Namespace

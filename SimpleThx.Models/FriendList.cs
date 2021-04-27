@@ -16,6 +16,8 @@ namespace SimpleThx.Models
 
         public Guid UserID { get; set; }
 
+        public int AccountID { get; set; }
+
         [Display(Name = "Name")]
         public string FullName { get; set; }
         

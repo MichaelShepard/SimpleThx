@@ -33,6 +33,11 @@ namespace SimpleThx.Models
 
         public string PictureURL { get; set; }
 
+        [Display(Name = "Friend ID")]
+        public int FriendID { get; set; }
+
+        public Guid FriendSend { get; set; } // person who sends request
+
         [DisplayName("Status")]
         public FriendStatus Status { get; set; }
 
