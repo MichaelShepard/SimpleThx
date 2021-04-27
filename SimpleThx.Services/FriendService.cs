@@ -26,28 +26,28 @@ namespace SimpleThx.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-
+                // Gets all the friends you Received request from
                 var query = from e in ctx.Friends
-                            .Where(e => e.FriendReceive == _userID && e.Status == FriendStatus.Accepted)
+                            .Where(e => e.FriendReceive == _userID && e.Status != FriendStatus.Declined)
                             join d in ctx.Accounts on e.FriendSend equals d.UserID
 
-                                        select new FriendList
-                                        {
-                                            FriendID = e.FriendID,
-                                            FullName = d.FirstName + " " + d.LastName,
-                                            State = d.State,
-                                            Country = d.Country,
-                                            FriendReceive = e.FriendReceive,
-                                            FriendSend = e.FriendSend,
-                                            Status = e.Status,
-                                            CreateUTC = e.CreateUTC
+                            select new FriendList
+                            {
+                                FriendID = e.FriendID,
+                                FullName = d.FirstName + " " + d.LastName,
+                                State = d.State,
+                                Country = d.Country,
+                                FriendReceive = e.FriendReceive,
+                                FriendSend = e.FriendSend,
+                                Status = e.Status,
+                                CreateUTC = e.CreateUTC
 
-                                        };
+                            };
                 var query1 = query.ToList();
 
-
+                // Gets all the friends you SEND requests from
                 var query2 = from e2 in ctx.Friends
-                             where e2.FriendSend == _userID && e2.Status == FriendStatus.Accepted
+                             where e2.FriendSend == _userID && e2.Status != FriendStatus.Declined
                              join d2 in ctx.Accounts on e2.FriendReceive equals d2.UserID
 
                              select new FriendList
@@ -72,92 +72,93 @@ namespace SimpleThx.Services
         } // END Get Friends
 
 
-    public IEnumerable<FriendList> GetNewFriends()
-    {
-        using (var ctx = new ApplicationDbContext())
+        public IEnumerable<FriendList> GetNewFriends()
         {
+            using (var ctx = new ApplicationDbContext())
+            {
 
-            var query = from e in ctx.Friends
+                var query = from e in ctx.Friends
 
-            .Where(e => e.FriendReceive == _userID && e.Status == FriendStatus.Pending)
-                        join d in ctx.Accounts on e.FriendSend equals d.UserID
-                        select new FriendList
-                        {
-                            FriendID = e.FriendID,
-                            FullName = d.FirstName + " " + d.LastName,
-                            State = d.State,
-                            Country = d.Country,
-                            FriendReceive = e.FriendReceive,
-                            FriendSend = e.FriendSend,
-                            Status = e.Status,
-                            CreateUTC = e.CreateUTC
+                .Where(e => e.FriendReceive == _userID && e.Status == FriendStatus.Pending)
+                            join d in ctx.Accounts on e.FriendSend equals d.UserID
+                            select new FriendList
+                            {
+                                FriendID = e.FriendID,
+                                FullName = d.FirstName + " " + d.LastName,
+                                State = d.State,
+                                Country = d.Country,
+                                FriendReceive = e.FriendReceive,
+                                FriendSend = e.FriendSend,
+                                Status = e.Status,
+                                CreateUTC = e.CreateUTC
 
-                        };
+                            };
 
-            return query.ToArray();
+                return query.ToArray();
+
+            }
+        } // END Get Friends
+
+
+        public Guid GetFriendGuidByID(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var entity = ctx.Accounts
+                    .Single(e => e.AccountID == id);
+
+                return entity.UserID;
+
+            }
 
         }
-    } // END Get Friends
 
 
-    public Guid GetFriendGuidByID(int id)
-    {
-        using (var ctx = new ApplicationDbContext())
+        public AccountInfoList GetFriendByID(int id)
         {
-
-            var entity = ctx.Accounts
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Accounts
                 .Single(e => e.AccountID == id);
 
-            return entity.UserID;
+                return new AccountInfoList
+                {
+                    UserID = entity.UserID,
+                    FirstName = entity.FirstName,
+                    LastName = entity.LastName,
+                    State = entity.State,
+                    Country = entity.Country
+                };
 
+            }
         }
 
-    }
 
 
-    public AccountInfoList GetFriendByID(int id)
-    {
-        using (var ctx = new ApplicationDbContext())
+
+        public IEnumerable<AccountInfoList> FriendSearch(string searchString)
         {
-            var entity = ctx.Accounts
-            .Single(e => e.AccountID == id);
-
-            return new AccountInfoList
+            using (var ctx = new ApplicationDbContext())
             {
-                UserID = entity.UserID,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                State = entity.State,
-                Country = entity.Country
-            };
-
-        }
-    }
-
-        
-
-
-    public IEnumerable<AccountInfoList> FriendSearch(string searchString)
-    {
-        using (var ctx = new ApplicationDbContext())
-        {
                 var query = GetFriends();
-                
+
 
                 // This gets all friends where I RECEIVED an invite
-               var receivedRequest = query.Where(e2 => e2.FriendReceive == _userID)
-                    .Select(e => e.FriendSend).ToList();
+                var receivedRequest = query.Where(e2 => e2.FriendReceive == _userID)
+                     .Select(e => e.FriendSend).ToList();
 
-                     // This gets all friends where I SENT an invite
-                  var sentRequest =  query.Where(e2 => e2.FriendSend == _userID)
-                    .Select(e => e.FriendReceive).ToList();
+                // This gets all friends where I SENT an invite
+                var sentRequest = query.Where(e2 => e2.FriendSend == _userID)
+                  .Select(e => e.FriendReceive).ToList();
 
-
+                //Combines all the two into one query
                 receivedRequest.AddRange(sentRequest);
 
-                var allAccounts = ctx.Accounts 
-                    .Where(e3=> e3.UserID != _userID)
-                    .Where(e4=> receivedRequest.All(e5=> e5 != e4.UserID))
+                // Removes the users account
+                var allAccounts = ctx.Accounts
+                    .Where(e3 => e3.UserID != _userID)
+                    .Where(e4 => receivedRequest.All(e5 => e5 != e4.UserID))
 
 
 
@@ -176,153 +177,89 @@ namespace SimpleThx.Services
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     allAccounts = allAccounts.Where(e => e.FullName.Contains(searchString)).ToList();
-                    
-                }
 
+                }
 
                 return allAccounts;
 
-                //where !ctx.Friends.Select(b=> b.FriendSend).Contains(_userID)
-                // where !ctx.Friends.Select(b => b.FriendReceive).Contains(_userID)
-
-                //where !ctx.Friends.Any(b => b.FriendSend == _userID && b.FriendReceive == _userID)
-                //where (e.UserID != _userID) // Removes the user under search from from
-
-                //select new AccountInfoList
-
-                //{
-
-                //    AccountID = e.AccountID,
-                //    FullName = e.FirstName + " " + e.LastName,
-                //    State = e.State,
-                //    Country = e.Country
-
-                //};
-                //var query1 = query.ToList();
-
-                //var query2 = from e in ctx.Accounts
-                //                //where !ctx.Friends.Select(b=> b.FriendSend).Contains(_userID)
-                //                // where !ctx.Friends.Select(b => b.FriendReceive).Contains(_userID)
-
-                //            where !ctx.Friends.Any(b => b.FriendReceive == _userID)
-                //            where (e.UserID != _userID) // Removes the user under search from from
-
-                //            select new AccountInfoList
-
-                //            {
-
-                //                AccountID = e.AccountID,
-                //                FullName = e.FirstName + " " + e.LastName,
-                //                State = e.State,
-                //                Country = e.Country
-
-                //            };
-
-
-                //var query = from e in ctx.Accounts
-                //            //where !ctx.Friends.Select(b=> b.FriendSend).Contains(_userID)
-                //            // where !ctx.Friends.Select(b => b.FriendReceive).Contains(_userID)
-
-                //            where !ctx.Friends.Any(b => b.FriendSend == _userID)
-                //            where (e.UserID != _userID) // Removes the user under search from from
-
-                //            select new AccountInfoList
-
-                //        {
-
-                //            AccountID = e.AccountID,
-                //            FullName = e.FirstName + " " + e.LastName,
-                //            State = e.State,
-                //            Country = e.Country
-
-                //        };
-
-                
-
-                
-
-                //var query3 = query2.ToList();
-                //query3.AddRange(query1);
-                //return query3;
-
             }
-    }
-
-    public FriendList CreatesFriendListModel(int id)
-    {
-
-        Guid FriendReceive = GetFriendGuidByID(id);
-
-
-        var entity = new FriendList()
-        {
-            FriendSend = _userID,
-            FriendReceive = FriendReceive,
-            Status = FriendStatus.Pending,
-            CreateUTC = DateTimeOffset.Now
-        };
-
-        return entity;
-    }
-
-
-
-    public bool PostConnection(FriendList model)
-    {
-        var entity = new Friend()
-        {
-            FriendSend = _userID,
-            FriendReceive = model.FriendReceive,
-            Status = FriendStatus.Pending,
-            CreateUTC = DateTimeOffset.Now
-        };
-
-        using (var ctx = new ApplicationDbContext())
-        {
-            ctx.Friends.Add(entity);
-            return ctx.SaveChanges() == 1;
         }
-    }
 
-    public FriendList GetFriendListModel(int id)
-    {
-
-        using (var ctx = new ApplicationDbContext())
+        public FriendList CreatesFriendListModel(int id)
         {
-            var entity = ctx.Friends
-                .Single(e => e.FriendID == id);
 
-            return new FriendList
+            Guid FriendReceive = GetFriendGuidByID(id);
+
+
+            var entity = new FriendList()
             {
-                FriendID = entity.FriendID,
-                FriendReceive = entity.FriendReceive,
-                FriendSend = entity.FriendSend,
-                Status = entity.Status,
-
+                FriendSend = _userID,
+                FriendReceive = FriendReceive,
+                Status = FriendStatus.Pending,
+                CreateUTC = DateTimeOffset.Now
             };
-        }
-    }
 
-    public bool PostUpdateFriend(FriendList model, FriendStatus status)
-    {
-        using (var ctx = new ApplicationDbContext())
+            return entity;
+        }
+
+
+
+        public bool PostConnection(FriendList model)
         {
-            var entity = ctx.Friends
-                .Single(e => e.FriendID == model.FriendID);
+            var entity = new Friend()
+            {
+                FriendSend = _userID,
+                FriendReceive = model.FriendReceive,
+                Status = FriendStatus.Pending,
+                CreateUTC = DateTimeOffset.Now
+            };
 
-            entity.FriendID = model.FriendID;
-            entity.FriendReceive = model.FriendReceive;
-            entity.FriendSend = model.FriendSend;
-            entity.Status = status;
-            entity.ModifiedUTC = DateTimeOffset.Now;
-
-            return ctx.SaveChanges() == 1;
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Friends.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
         }
-    }
+
+        public FriendList GetFriendListModel(int id)
+        {
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Friends
+                    .Single(e => e.FriendID == id);
+
+                return new FriendList
+                {
+                    FriendID = entity.FriendID,
+                    FriendReceive = entity.FriendReceive,
+                    FriendSend = entity.FriendSend,
+                    Status = entity.Status,
+
+                };
+            }
+        }
+
+        public bool PostUpdateFriend(FriendList model, FriendStatus status)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Friends
+                    .Single(e => e.FriendID == model.FriendID);
+
+                entity.FriendID = model.FriendID;
+                entity.FriendReceive = model.FriendReceive;
+                entity.FriendSend = model.FriendSend;
+                entity.Status = status;
+                entity.ModifiedUTC = DateTimeOffset.Now;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
 
 
 
 
 
-} // END Friend Service
+    } // END Friend Service
 } // END Namespace

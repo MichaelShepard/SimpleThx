@@ -39,13 +39,6 @@ namespace SimpleThx.Data
 
         // Foreign Key(s)
 
-        //[InverseProperty(nameof(Friend.Sender))]
-        //public virtual ICollection<Friend> FriendSender { get; set; }
-
-
-        //[InverseProperty(nameof(Friend.Receiver))]
-        ///public virtual ICollection<Friend> FriendReceiver { get; set; }// Uses code first principles to create dbo.FriendAccountInfo table which is made up of PK's of each
-
         public virtual ICollection<Friend> Friends { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }  // Uses code first principles to create dbo.PostAccountInfo table which is made up of PK's of each

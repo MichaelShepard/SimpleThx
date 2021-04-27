@@ -15,11 +15,11 @@ namespace SimpleThx.Models
 
 
         [DisplayName("First Name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$", ErrorMessage = "Use letters only please")]
         public string FirstName { get; set; }
 
         [DisplayName("Last Name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$", ErrorMessage = "Use letters only please")]
         public string LastName { get; set; }
 
         [MaxLength(2, ErrorMessage = "Please Enter in Two Letters")]
