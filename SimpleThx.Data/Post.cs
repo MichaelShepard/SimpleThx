@@ -11,7 +11,8 @@ namespace SimpleThx.Data
     public enum Status
     {
         Accept = 1,
-        Decline
+        Decline,
+        Pending
     }
 
 
@@ -23,6 +24,9 @@ namespace SimpleThx.Data
 
         [Required]
         public Guid PostUserID { get; set; }
+
+        [Required]
+        public Guid AboutUserID { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -41,7 +45,7 @@ namespace SimpleThx.Data
 
         // Foreign Key(s)
 
-        public int AboutUserID { get; set; }
+        public virtual ICollection<AccountInfo> Accounts { get; set; } // Uses code first principles to create dbo.PostAccountInfo table which is made up of PK's of each
 
-    }  // END Post Class
-}  // END Namespace
+    } // END Post Class
+ }  // END Namespace

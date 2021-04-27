@@ -26,7 +26,17 @@ namespace SimpleThx.webmvc.Controllers
             return View(model);
         }
 
+        public ActionResult NewFriendConnections()
+        {
 
+            var service = CreateFriendService();
+            var model = service.GetNewFriends();
+
+
+            return View(model);
+        }
+
+        // GET: Friend by ID
         public ActionResult getFriendByID(int id)
         {
 
@@ -38,6 +48,7 @@ namespace SimpleThx.webmvc.Controllers
         }
 
 
+        // GET: Search for Friends
         public ActionResult SearchForFriends(string searchString)
         {
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,8 +41,8 @@ namespace SimpleThx.Data
 
         // Foreign Key(s)
 
+       
         public virtual ICollection<AccountInfo> Accounts { get; set; }
-
 
     } // END Friend Class
 } // END Namespace

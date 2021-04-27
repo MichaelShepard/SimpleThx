@@ -11,7 +11,10 @@ namespace SimpleThx.Models
     public class PostCreate
     {
         [Required]
-        public int AboutUserID { get; set; }
+        public Guid AboutUserID { get; set; }
+
+        [Required]
+        public Guid PostUserID { get; set; }
 
         [Required]
         [MinLength(2, ErrorMessage = "Please enter at least 2 characters.")]
@@ -26,6 +29,10 @@ namespace SimpleThx.Models
         public string Content { get; set; }
 
         public Status Status { get; set; }
+
+        [Required]
+        [Display(Name = "Created")]
+        public DateTimeOffset CreateUTC { get; set; }
 
     }
 }
