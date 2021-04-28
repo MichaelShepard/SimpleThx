@@ -10,7 +10,7 @@ namespace SimpleThx.Data
 
     public enum Status
     {
-        Accept = 1,
+        Accepted = 1,
         Declined,
         Pending
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using SimpleThx.Data;
 using SimpleThx.Models;
 using SimpleThx.Services;
 using System;
@@ -54,6 +55,37 @@ namespace SimpleThx.webmvc.Controllers
         }
 
 
+       public ActionResult UpdatePost(int id, int status)
+        {
+            var service = CreatePostService();
+            var model = service.GetPostListModel(id);
+
+            Status newStatus = Status.Pending;
+
+            if(status == 1)
+            {
+                newStatus = Status.Accepted;
+
+            } else if (status == 2) {
+
+                newStatus = Status.Declined;
+
+            }
+
+            if (service.PostUpdatePost (model, newStatus))
+            {
+                TempData["SaveResult"] = "You accepted post";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Sorry something went wrong. Please try again.");
+
+            return View(model);
+
+        } // END Update Post
+
+
+
 
         // Helper Methods
         private PostService CreatePostService()
@@ -62,6 +94,9 @@ namespace SimpleThx.webmvc.Controllers
             var service = new PostService(userId);
             return service;
         }
+
+
+
         
 
     } // END Post Controller

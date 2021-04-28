@@ -98,26 +98,43 @@ namespace SimpleThx.Services
                 query3.AddRange(query1);
                 return query3;
 
-
-                //var query = ctx
-                //    .Posts
-                //    .Where(e => e.PostUserID == _userID)
-                //    .Select(e => new PostList
-                //    {
-                //        PostID = e.PostID,
-                //        Title = e.Title,
-                //        Content = e.Content,
-                //        CreateUTC = e.CreateUTC,
-                //        Status = e.Status
-
-                //    });
-
-                //return query.ToArray();
             }
 
         }
 
+        public PostList GetPostListModel(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == id);
 
+                return new PostList
+                {
+                    PostID = entity.PostID,
+                    PostUserID = entity.PostUserID,
+                    AboutUserID = entity.AboutUserID,
+                    Status = entity.Status
+                };
+            }
+        } // END Get Post List Model
+
+        public bool PostUpdatePost(PostList model, Status status)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == model.PostID);
+
+                entity.PostID = model.PostID;
+                entity.PostUserID = model.PostUserID;
+                entity.AboutUserID = model.AboutUserID;
+                entity.Status = status;
+                entity.ModifiedUTC = DateTimeOffset.Now;
+
+                return ctx.SaveChanges() == 1;
+            }
+        } //END Post Update Post
 
 
     } // END Post Service
