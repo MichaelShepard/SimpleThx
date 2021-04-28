@@ -6,13 +6,14 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PostID)
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            <a>???</a>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -29,10 +30,25 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
+
+        @Html.HiddenFor(modelItem => item.AboutUserID)
+        @Html.HiddenFor(modelItem => item.UserID)
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.PostID)
+        @Html.DisplayFor(modelItem => item.FullName)
+    </td>
+    <td>
+        @if (item.AboutUserID == item.UserID)
+        {
+            <a>Received</a>
+
+        }
+        else if (item.PostUserID == item.UserID)
+        {
+            <a>Sent</a>
+        }
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Title)
@@ -44,13 +60,13 @@
         @Html.DisplayFor(modelItem => item.CreateUTC)
     </td>
     <th>
-        @Html.DisplayNameFor(model => model.Status)
+        @Html.DisplayFor(modelItem => item.Status)
     </th>
     <td>
 
-        @if (item.Status == SimpleThx.Data.Status.Pending)
+        @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
         {
-            <input type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.PostID, @status = 1 }))'" />
+            <input type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 1 }))'" />
 
         }
         else if (item.Status == SimpleThx.Data.Status.Accept)
@@ -61,15 +77,15 @@
     </td>
     <td>
 
-        @if (item.Status == SimpleThx.Data.Status.Pending)
+        @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
         {
-            <input type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.PostID, @status = 2 }))'" />
+            <input type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 2 }))'" />
         }
 
     </td>
 
 
 </tr>
-}
+    }
 
 </table>

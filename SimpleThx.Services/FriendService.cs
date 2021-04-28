@@ -20,6 +20,8 @@ namespace SimpleThx.Services
             _userID = userID;
         }
 
+
+        // Gets Friends
         public IEnumerable<FriendList> GetFriends()
         {
 
@@ -72,6 +74,7 @@ namespace SimpleThx.Services
         } // END Get Friends
 
 
+        // Gets List of New Friends
         public IEnumerable<FriendList> GetNewFriends()
         {
             using (var ctx = new ApplicationDbContext())

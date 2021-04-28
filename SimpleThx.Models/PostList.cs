@@ -14,6 +14,21 @@ namespace SimpleThx.Models
 
         public int PostID { get; set; }
 
+        public Guid UserID { get; set; }
+
+        public int AccountID { get; set; }
+
+        [Display(Name = "Name")]
+        public string FullName { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string State { get; set; }
+
+        public string Country { get; set; }
+
         public Guid PostUserID { get; set; }
        
         public Guid AboutUserID { get; set; }

@@ -26,8 +26,6 @@ namespace SimpleThx.webmvc.Controllers
         {
             
             return View();
-            
-            
            
         }
 
@@ -50,7 +48,7 @@ namespace SimpleThx.webmvc.Controllers
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Account Info could not be created.");
+            ModelState.AddModelError("", "Post could not be created.");
             return View(model);
 
         }

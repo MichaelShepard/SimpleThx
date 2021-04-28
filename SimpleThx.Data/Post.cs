@@ -11,7 +11,7 @@ namespace SimpleThx.Data
     public enum Status
     {
         Accept = 1,
-        Decline,
+        Declined,
         Pending
     }
 

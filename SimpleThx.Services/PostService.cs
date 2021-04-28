@@ -55,20 +55,64 @@ namespace SimpleThx.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx
-                    .Posts
-                    .Where(e => e.PostUserID == _userID)
-                    .Select(e => new PostList
-                    {
-                        PostID = e.PostID,
-                        Title = e.Title,
-                        Content = e.Content,
-                        CreateUTC = e.CreateUTC,
-                        Status = e.Status
-                
-                    });
+                // Gets all the Posts that you send
+                var query = from e in ctx.Posts
+                            .Where(e => e.PostUserID == _userID && e.Status != Status.Declined)
+                            join d in ctx.Accounts on e.AboutUserID equals d.UserID
 
-                return query.ToArray();
+                            select new PostList
+                            {
+                                PostID = e.PostID,
+                                FullName = d.FirstName + " " + d.LastName,
+                                Title = e.Title,
+                                Content = e.Content,
+                                UserID = _userID,
+                                PostUserID = e.PostUserID,
+                                AboutUserID = e.AboutUserID,
+                                Status = e.Status,
+                                CreateUTC = e.CreateUTC
+
+                            };
+                var query1 = query.ToList();
+
+                // Gets all the Posts that you receive
+                var query2 = from e2 in ctx.Posts
+                             where e2.AboutUserID == _userID && e2.Status != Status.Declined
+                             join d2 in ctx.Accounts on e2.PostUserID equals d2.UserID
+
+                             select new PostList
+                             {
+                                 PostID = e2.PostID,
+                                 FullName = d2.FirstName + " " + d2.LastName,
+                                 Title = e2.Title,
+                                 Content = e2.Content,
+                                 UserID = _userID,
+                                 PostUserID = e2.PostUserID,
+                                 AboutUserID = e2.AboutUserID,
+                                 Status = e2.Status,
+                                 CreateUTC = e2.CreateUTC
+
+                             };
+
+                var query3 = query2.ToList();
+                query3.AddRange(query1);
+                return query3;
+
+
+                //var query = ctx
+                //    .Posts
+                //    .Where(e => e.PostUserID == _userID)
+                //    .Select(e => new PostList
+                //    {
+                //        PostID = e.PostID,
+                //        Title = e.Title,
+                //        Content = e.Content,
+                //        CreateUTC = e.CreateUTC,
+                //        Status = e.Status
+
+                //    });
+
+                //return query.ToArray();
             }
 
         }

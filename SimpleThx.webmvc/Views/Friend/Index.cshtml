@@ -95,7 +95,7 @@
 
         @if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
         {
-            <input type="button" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendSend}))'" />
+            <input type="button" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendReceive}))'" />
         }
 
     </td>
