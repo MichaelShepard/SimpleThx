@@ -7,15 +7,26 @@ using System.Threading.Tasks;
 
 namespace SimpleThx.Data
 {
+
+    public enum Status
+    {
+        Accept = 1,
+        Decline,
+        Pending
+    }
+
+
     public class Post
     {
 
         [Key]
         public int PostID { get; set; }
 
-        public int PostUserID { get; set; }
+        [Required]
+        public Guid PostUserID { get; set; }
 
-        public int AboutUserID { get; set; }
+        [Required]
+        public Guid AboutUserID { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -24,12 +35,17 @@ namespace SimpleThx.Data
         public string Content { get; set; }
 
         [Required]
-        public Enum Status { get; set; }
+        public Status Status { get; set; }
 
+        [Required]
         public DateTimeOffset CreateUTC { get; set; }
 
         public DateTimeOffset? ModifiedUTC { get; set; }
 
 
-    }
-}
+        // Foreign Key(s)
+
+        public virtual ICollection<AccountInfo> Accounts { get; set; } // Uses code first principles to create dbo.PostAccountInfo table which is made up of PK's of each
+
+    } // END Post Class
+ }  // END Namespace

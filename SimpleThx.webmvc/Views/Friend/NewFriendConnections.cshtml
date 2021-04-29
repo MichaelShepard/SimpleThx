@@ -1,0 +1,110 @@
+﻿@model IEnumerable<SimpleThx.Models.FriendList>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h2>Connection with New Friends</h2>
+<br />
+<p>
+    @Html.ActionLink("Find Friends", "SearchForFriends")
+</p>
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateUTC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+
+        </th>
+
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @Html.HiddenFor(modelItem => item.FriendID)
+            @Html.HiddenFor(modelItem => item.FriendSend)
+            @Html.HiddenFor(modelItem => item.UserID)
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateUTC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+
+            <td>
+
+                @if (item.Status == SimpleThx.Data.FriendStatus.Pending)
+                {
+                    <input type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 1 }))'" />
+
+                }
+                else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
+                {
+
+                }
+
+            </td>
+            <td>
+
+                @if (item.Status == SimpleThx.Data.FriendStatus.Pending)
+                {
+                    <input type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 2 }))'" />
+                }
+
+            </td>
+            <td>
+
+                @if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
+                {
+                    <input type="button" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendSend}))'" />
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>

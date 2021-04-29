@@ -33,7 +33,7 @@ namespace SimpleThx.Data
         }
 
 
-        public DbSet<Account> Accounts { get; set; } //<--- Add this
+        public DbSet<AccountInfo> Accounts { get; set; } //<--- Add this
         public DbSet<Post> Posts { get; set; } //<--- Add this
         public DbSet<Friend> Friends { get; set; } //<--- Add this
 
