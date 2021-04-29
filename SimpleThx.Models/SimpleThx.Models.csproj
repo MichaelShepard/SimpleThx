@@ -63,6 +63,7 @@
     <Compile Include="FriendCreate.cs" />
     <Compile Include="FriendList.cs" />
     <Compile Include="PostCreate.cs" />
+    <Compile Include="PostEdit.cs" />
     <Compile Include="PostList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

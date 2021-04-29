@@ -119,7 +119,7 @@ namespace SimpleThx.Services
             }
         } // END Get Post List Model
 
-        public bool PostUpdatePost(PostList model, Status status)
+        public bool UpdatePostStatus(PostList model, Status status)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -135,6 +135,48 @@ namespace SimpleThx.Services
                 return ctx.SaveChanges() == 1;
             }
         } //END Post Update Post
+
+
+        public PostList GetPostByID(int id)
+        {
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == id);
+
+                return new PostList
+                {
+
+                    PostID = entity.PostID,
+                    PostUserID = entity.PostUserID,
+                    Title = entity.Title,
+                    Content = entity.Content,
+
+                };
+            }
+        }
+
+        public bool UpdatePostContent(PostEdit model)
+        {
+
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == model.PostID && e.PostUserID == _userID);
+
+                entity.PostID = model.PostID;
+                entity.PostUserID = model.PostUserID;
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.ModifiedUTC = DateTimeOffset.Now;
+
+
+                return ctx.SaveChanges() == 1;
+
+
+            }
+        }
 
 
     } // END Post Service

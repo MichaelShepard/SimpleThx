@@ -84,6 +84,15 @@
 
     </td>
 
+    <td>
+
+        @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID == item.UserID)
+        {
+            <input type="button" value="Update" onclick="location.href='@Html.Raw(@Url.Action("EditPost", "Post", new { @id = item.PostID}))'" />
+        }
+
+    </td>
+
 
 </tr>
     }
