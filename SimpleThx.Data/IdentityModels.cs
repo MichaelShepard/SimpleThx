@@ -37,6 +37,8 @@ namespace SimpleThx.Data
         public DbSet<Post> Posts { get; set; } //<--- Add this
         public DbSet<Friend> Friends { get; set; } //<--- Add this
 
+        public DbSet<Comment> Comments { get; set; } //<--- Add this
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder
