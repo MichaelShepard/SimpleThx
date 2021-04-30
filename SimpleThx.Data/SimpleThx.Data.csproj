@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountInfo.cs" />
+    <Compile Include="Comment.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Post.cs" />
