@@ -43,6 +43,9 @@ namespace SimpleThx.Data
 
         public virtual ICollection<Post> Posts { get; set; }  // Uses code first principles to create dbo.PostAccountInfo table which is made up of PK's of each
 
+        public virtual ICollection<Comment> Comments { get; set; }
+
+
 
     } // END Account Class
 } // END Namespace
