@@ -45,6 +45,7 @@ namespace SimpleThx.Services
                 .Select(e => new CommentList
                 {
                     CommentID = e.CommentID,
+                    CommentorUserID = e.CommentorUserID,
                     CommentContent = e.CommentContent,
                     CreateUTC = e.CreateUTC
 

@@ -39,6 +39,7 @@ namespace SimpleThx.Services
                                 FullName = d.FirstName + " " + d.LastName,
                                 State = d.State,
                                 Country = d.Country,
+                                UserID = _userID,
                                 FriendReceive = e.FriendReceive,
                                 FriendSend = e.FriendSend,
                                 Status = e.Status,
@@ -59,6 +60,7 @@ namespace SimpleThx.Services
 
                                  State = d2.State,
                                  Country = d2.Country,
+                                 UserID = _userID,
                                  FriendReceive = e2.FriendReceive,
                                  FriendSend = e2.FriendSend,
                                  Status = e2.Status,

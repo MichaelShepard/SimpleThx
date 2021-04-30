@@ -10,7 +10,6 @@ namespace SimpleThx.Models
 {
     public class CommentCreate
     {
-
         public int CommentID { get; set; }
 
         public int PostID { get; set; }
