@@ -57,7 +57,9 @@ namespace SimpleThx.Services
             {
                 // Gets all the Posts that you send
                 var query = from e in ctx.Posts
-                            .Where(e => e.PostUserID == _userID && e.Status != Status.Declined)
+                            //.Where(e => e.PostUserID == _userID && e.Status != Status.Declined)
+                            where e.PostUserID == _userID && e.Status != Status.Declined
+                            orderby e.CreateUTC, e.ModifiedUTC
                             join d in ctx.Accounts on e.AboutUserID equals d.UserID
 
                             select new PostList
@@ -78,6 +80,7 @@ namespace SimpleThx.Services
                 // Gets all the Posts that you receive
                 var query2 = from e2 in ctx.Posts
                              where e2.AboutUserID == _userID && e2.Status != Status.Declined
+                             orderby e2.CreateUTC, e2.ModifiedUTC
                              join d2 in ctx.Accounts on e2.PostUserID equals d2.UserID
 
                              select new PostList

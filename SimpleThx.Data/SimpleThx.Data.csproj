@@ -61,6 +61,15 @@
     <Compile Include="Comment.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\202104301741354_InitialCreate.cs" />
+    <Compile Include="Migrations\202104301741354_InitialCreate.designer.cs">
+      <DependentUpon>202104301741354_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105011633418_CommentPostID.cs" />
+    <Compile Include="Migrations\202105011633418_CommentPostID.designer.cs">
+      <DependentUpon>202105011633418_CommentPostID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +79,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202104301741354_InitialCreate.resx">
+      <DependentUpon>202104301741354_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105011633418_CommentPostID.resx">
+      <DependentUpon>202105011633418_CommentPostID.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

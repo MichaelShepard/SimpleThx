@@ -93,6 +93,15 @@
 
     </td>
 
+    <td>
+
+        @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID != item.UserID)
+        {
+            <input type="button" value="Comment" onclick="location.href='@Html.Raw(@Url.Action("CreateComment", "Comment", new { @id = item.PostID}))'" />
+        }
+
+    </td>
+
 
 </tr>
     }

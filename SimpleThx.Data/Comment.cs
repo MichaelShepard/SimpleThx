@@ -21,6 +21,9 @@ namespace SimpleThx.Data
         public int CommentID { get; set; }
 
         [Required]
+        public int PostID { get; set; }
+
+        [Required]
         public Guid CommentorUserID { get; set; }
 
         [Required]

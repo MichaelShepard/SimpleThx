@@ -18,11 +18,23 @@ namespace SimpleThx.Services
             _userID = userID;
         }
 
-        public bool CreateComment (CommentCreate model)
+        public CommentCreate CommentModelCreate(CommentCreate model, int id)
+        {
+
+            model.CommentorUserID = _userID;
+            model.PostID = id;
+            model.Status = CommentStatus.Pending;
+            model.CreateUTC = DateTimeOffset.Now;
+
+            return model;
+        }
+
+        public bool CreateComment (CommentCreate model, int id)
         {
 
             var entity = new Comment()
             {
+                PostID = id,
                 CommentorUserID = _userID,
                 CommentContent = model.CommentContent,
                 CreateUTC = DateTimeOffset.Now

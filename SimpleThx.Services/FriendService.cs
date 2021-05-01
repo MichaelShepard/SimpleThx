@@ -30,8 +30,10 @@ namespace SimpleThx.Services
             {
                 // Gets all the friends you Received request from
                 var query = from e in ctx.Friends
-                            .Where(e => e.FriendReceive == _userID && e.Status != FriendStatus.Declined)
+                            //.Where(e => e.FriendReceive == _userID && e.Status != FriendStatus.Declined)
+                            where e.FriendReceive == _userID && e.Status != FriendStatus.Declined                            
                             join d in ctx.Accounts on e.FriendSend equals d.UserID
+                            orderby d.LastName
 
                             select new FriendList
                             {
@@ -52,6 +54,7 @@ namespace SimpleThx.Services
                 var query2 = from e2 in ctx.Friends
                              where e2.FriendSend == _userID && e2.Status != FriendStatus.Declined
                              join d2 in ctx.Accounts on e2.FriendReceive equals d2.UserID
+                             orderby d2.LastName
 
                              select new FriendList
                              {

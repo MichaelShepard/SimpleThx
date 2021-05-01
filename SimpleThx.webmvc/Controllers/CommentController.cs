@@ -30,19 +30,13 @@ namespace SimpleThx.webmvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult CreateComment(CommentCreate model)
+        public ActionResult CreateComment(CommentCreate model, int id)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-
-            }
-
             var service = CreateCommentService();
-            //var entity = service.CommentModelCreate(model, id);
+            var entity = service.CommentModelCreate(model, id); // Create Model bc I am only bringing over the post ID
 
-            if(service.CreateComment(model))
+            
+            if(service.CreateComment(model, id))
             {
                 ViewBag.SaveResult = "You Commented!";
                 return RedirectToAction("Index");
