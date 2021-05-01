@@ -24,7 +24,7 @@ namespace SimpleThx.Services
 
             model.PostUserID = _userID;
             model.AboutUserID = id;
-            model.Status = Status.Pending;
+            model.Status = Status.Accepted;
             model.CreateUTC = DateTimeOffset.Now;
             
             return model;

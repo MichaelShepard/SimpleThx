@@ -10,13 +10,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CommentID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CommentorUserID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.CommentContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateUTC)
@@ -25,25 +22,24 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CommentID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CommentorUserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CommentContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateUTC)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+<tr>
+
+    @Html.HiddenFor(modelItem => item.CommentID)
+    @Html.HiddenFor(modelItem => item.CommentorUserID)
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.CommentContent)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreateUTC)
+    </td>
+
+
+</tr>
 }
 
 </table>

@@ -13,7 +13,7 @@
             @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
-            <a>???</a>
+            <a>About</a>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -42,12 +42,12 @@
     <td>
         @if (item.AboutUserID == item.UserID)
         {
-            <a>Received</a>
+            <a>Me</a>
 
         }
         else if (item.PostUserID == item.UserID)
         {
-            <a>Sent</a>
+            <a>You</a>
         }
     </td>
     <td>

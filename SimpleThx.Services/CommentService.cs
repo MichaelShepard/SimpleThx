@@ -52,16 +52,19 @@ namespace SimpleThx.Services
             using (var ctx = new ApplicationDbContext()) 
             { 
 
-                var query = ctx.Comments
-                .Where(e => e.CommentorUserID == _userID)
-                .Select(e => new CommentList
+                var query = from e in ctx.Comments
+                where e.CommentorUserID == _userID
+                join d in ctx.Posts on e.PostID equals d.PostID
+
+                select new CommentList
                 {
                     CommentID = e.CommentID,
+                    Title = d.Title,
                     CommentorUserID = e.CommentorUserID,
                     CommentContent = e.CommentContent,
                     CreateUTC = e.CreateUTC
 
-                });
+                };
 
                 return query.ToList();
 
