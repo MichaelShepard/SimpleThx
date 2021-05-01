@@ -10,8 +10,8 @@ namespace SimpleThx.Data
 
     public enum Status
     {
-        Accept = 1,
-        Decline,
+        Accepted = 1,
+        Declined,
         Pending
     }
 
@@ -46,6 +46,10 @@ namespace SimpleThx.Data
         // Foreign Key(s)
 
         public virtual ICollection<AccountInfo> Accounts { get; set; } // Uses code first principles to create dbo.PostAccountInfo table which is made up of PK's of each
+
+        public virtual ICollection<Comment> Comments { get; set; }
+
+
 
     } // END Post Class
  }  // END Namespace

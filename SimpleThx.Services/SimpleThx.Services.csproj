@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountInfoService.cs" />
+    <Compile Include="CommentService.cs" />
     <Compile Include="FriendService.cs" />
     <Compile Include="PostService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

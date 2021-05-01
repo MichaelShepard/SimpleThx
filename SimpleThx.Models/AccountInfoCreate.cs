@@ -13,21 +13,27 @@ namespace SimpleThx.Models
 
         public Guid UserID { get; set; }
 
+        [DisplayName("First Name")]
         [Required (ErrorMessage = "First Name is required")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [MaxLength(100, ErrorMessage = "Must be less than 100 characters")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string FirstName { get; set; }
 
+        [DisplayName("Last Name")]
         [Required(ErrorMessage = "Last Name is required")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [MaxLength(100, ErrorMessage = "Must be less than 100 characters")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string LastName { get; set; }
 
+        [DisplayName("State")]
         [Required(ErrorMessage = "State is required")]
         [MaxLength(2, ErrorMessage = "Please Enter in Two Letters")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string State { get; set; }
 
+        [DisplayName("Country")]
         [Required(ErrorMessage = "Country is required")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string Country { get; set; }
 
         public string PictureURL { get; set; }

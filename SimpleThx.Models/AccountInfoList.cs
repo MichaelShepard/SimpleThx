@@ -25,12 +25,15 @@ namespace SimpleThx.Models
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
-       
+
+        [DisplayName("State")]
         [MaxLength(2, ErrorMessage = "Please Enter in Two Letters")]
         public string State { get; set; }
 
+        [DisplayName("Country")]
         public string Country { get; set; }
 
+        [DisplayName("Picture")]
         public string PictureURL { get; set; }
 
         [Display(Name = "Friend ID")]

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SimpleThx.Models.CommentList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Comments</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CommentContent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateUTC)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+
+    @Html.HiddenFor(modelItem => item.CommentID)
+    @Html.HiddenFor(modelItem => item.CommentorUserID)
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.CommentContent)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreateUTC)
+    </td>
+
+
+</tr>
+}
+
+</table>
