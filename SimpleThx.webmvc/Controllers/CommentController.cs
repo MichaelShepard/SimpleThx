@@ -9,12 +9,14 @@ using System.Web.Mvc;
 
 namespace SimpleThx.webmvc.Controllers
 {
+
     [Authorize]
     public class CommentController : Controller
     {
         // GET: Comment
         public ActionResult Index()
         {
+
             var service = CreateCommentService();
             var model = service.GetComments();
 
@@ -59,7 +61,7 @@ namespace SimpleThx.webmvc.Controllers
             return service;
 
         }
-
+          
 
     } // END Comment Controller
 } // END Namespace

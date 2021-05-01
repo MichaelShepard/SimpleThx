@@ -1,3 +1,4 @@
+
 ﻿using SimpleThx.Data;
 using SimpleThx.Models;
 using System;
@@ -17,6 +18,7 @@ namespace SimpleThx.Services
         {
             _userID = userID;
         }
+
 
         public CommentCreate CommentModelCreate(CommentCreate model, int id)
         {
@@ -70,6 +72,7 @@ namespace SimpleThx.Services
 
             }
         }
+
 
 
 
