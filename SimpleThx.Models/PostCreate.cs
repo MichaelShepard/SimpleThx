@@ -22,9 +22,8 @@ namespace SimpleThx.Models
         [Display(Name = "Title")]
         public string Title { get; set; }
 
-
         [Required]
-        [MaxLength(8000)]
+        [MaxLength(1000)]
         [Display(Name = "Content")]
         public string Content { get; set; }
 

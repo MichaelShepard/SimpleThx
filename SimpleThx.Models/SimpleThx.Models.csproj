@@ -60,9 +60,12 @@
     <Compile Include="AccountInfoCreate.cs" />
     <Compile Include="AccountInfoEdit.cs" />
     <Compile Include="AccountInfoList.cs" />
+    <Compile Include="CommentCreate.cs" />
+    <Compile Include="CommentList.cs" />
     <Compile Include="FriendCreate.cs" />
     <Compile Include="FriendList.cs" />
     <Compile Include="PostCreate.cs" />
+    <Compile Include="PostEdit.cs" />
     <Compile Include="PostList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

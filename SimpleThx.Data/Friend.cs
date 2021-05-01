@@ -17,7 +17,6 @@ namespace SimpleThx.Data
         
     }
 
-
     public class Friend
     {
 

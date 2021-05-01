@@ -48,6 +48,7 @@
 
     @Html.HiddenFor(modelItem => item.FriendID)
     @Html.HiddenFor(modelItem => item.FriendSend)
+    @Html.HiddenFor(modelItem => item.FriendReceive)
     @Html.HiddenFor(modelItem => item.UserID)
 
     <td>
@@ -68,12 +69,36 @@
         @Html.DisplayFor(modelItem => item.Status)
     </td>
 
+
+
     <td>
 
-       
+        @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
+        {
+            <input type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 1 }))'" />
+
+        }
+        else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
+        {
+
+        }
+
+    </td>
     <td>
 
-        @if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
+        @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
+        {
+            <input type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 2 }))'" />
+        }
+
+    </td>
+    <td>
+
+        @if (item.Status == SimpleThx.Data.FriendStatus.Accepted && item.FriendSend == item.UserID)
+        {
+            <input type="button" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendReceive}))'" />
+        }
+        else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
         {
             <input type="button" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendSend}))'" />
         }

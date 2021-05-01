@@ -15,21 +15,25 @@ namespace SimpleThx.Models
 
 
         [DisplayName("First Name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [MaxLength(100, ErrorMessage = "Must be less than 100 characters")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string FirstName { get; set; }
 
         [DisplayName("Last Name")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [MaxLength(100, ErrorMessage = "Must be less than 100 characters")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string LastName { get; set; }
 
+        [DisplayName("State")]
         [MaxLength(2, ErrorMessage = "Please Enter in Two Letters")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string State { get; set; }
 
+        [DisplayName("Country")]
+        [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string Country { get; set; }
 
         [DisplayName ("Modified")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public DateTimeOffset? ModifiedUTC { get; set; }
 
     }

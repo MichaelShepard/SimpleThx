@@ -22,6 +22,9 @@ namespace SimpleThx.Data
         public int CommentID { get; set; }
 
         [Required]
+        public int PostID { get; set; }
+
+        [Required]
         public Guid CommentorUserID { get; set; }
 
         [Required]
@@ -39,6 +42,8 @@ namespace SimpleThx.Data
 
         public virtual Post Post { get; set; } // Uses Entity Framework Notation where one post has many comments; uses the PK in each to create the connection
 
+        public virtual ICollection<AccountInfo> Accounts { get; set; } // Uses Entity Framework Notation for a many to many relationship
 
-    }
-}
+    } // END Commment CLass
+} // END NameSpace
+

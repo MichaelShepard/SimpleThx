@@ -24,7 +24,7 @@ namespace SimpleThx.Services
 
             model.PostUserID = _userID;
             model.AboutUserID = id;
-            model.Status = Status.Pending;
+            model.Status = Status.Accepted;
             model.CreateUTC = DateTimeOffset.Now;
             
             return model;
@@ -55,25 +55,131 @@ namespace SimpleThx.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx
-                    .Posts
-                    .Where(e => e.PostUserID == _userID)
-                    .Select(e => new PostList
-                    {
-                        PostID = e.PostID,
-                        Title = e.Title,
-                        Content = e.Content,
-                        CreateUTC = e.CreateUTC,
-                        Status = e.Status
-                
-                    });
+                // Gets all the Posts that you send
+                var query = from e in ctx.Posts
+                            //.Where(e => e.PostUserID == _userID && e.Status != Status.Declined)
+                            where e.PostUserID == _userID && e.Status != Status.Declined
+                            orderby e.CreateUTC, e.ModifiedUTC
+                            join d in ctx.Accounts on e.AboutUserID equals d.UserID
 
-                return query.ToArray();
+                            select new PostList
+                            {
+                                PostID = e.PostID,
+                                FullName = d.FirstName + " " + d.LastName,
+                                Title = e.Title,
+                                Content = e.Content,
+                                UserID = _userID,
+                                PostUserID = e.PostUserID,
+                                AboutUserID = e.AboutUserID,
+                                Status = e.Status,
+                                CreateUTC = e.CreateUTC
+
+                            };
+                var query1 = query.ToList();
+
+                // Gets all the Posts that you receive
+                var query2 = from e2 in ctx.Posts
+                             where e2.AboutUserID == _userID && e2.Status != Status.Declined
+                             orderby e2.CreateUTC, e2.ModifiedUTC
+                             join d2 in ctx.Accounts on e2.PostUserID equals d2.UserID
+
+                             select new PostList
+                             {
+                                 PostID = e2.PostID,
+                                 FullName = d2.FirstName + " " + d2.LastName,
+                                 Title = e2.Title,
+                                 Content = e2.Content,
+                                 UserID = _userID,
+                                 PostUserID = e2.PostUserID,
+                                 AboutUserID = e2.AboutUserID,
+                                 Status = e2.Status,
+                                 CreateUTC = e2.CreateUTC
+
+                             };
+
+                var query3 = query2.ToList();
+                query3.AddRange(query1);
+                return query3;
+
             }
 
         }
 
+        public PostList GetPostListModel(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == id);
 
+                return new PostList
+                {
+                    PostID = entity.PostID,
+                    PostUserID = entity.PostUserID,
+                    AboutUserID = entity.AboutUserID,
+                    Status = entity.Status
+                };
+            }
+        } // END Get Post List Model
+
+        public bool UpdatePostStatus(PostList model, Status status)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == model.PostID);
+
+                entity.PostID = model.PostID;
+                entity.PostUserID = model.PostUserID;
+                entity.AboutUserID = model.AboutUserID;
+                entity.Status = status;
+                entity.ModifiedUTC = DateTimeOffset.Now;
+
+                return ctx.SaveChanges() == 1;
+            }
+        } //END Post Update Post
+
+
+        public PostList GetPostByID(int id)
+        {
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == id);
+
+                return new PostList
+                {
+
+                    PostID = entity.PostID,
+                    PostUserID = entity.PostUserID,
+                    Title = entity.Title,
+                    Content = entity.Content,
+
+                };
+            }
+        }
+
+        public bool UpdatePostContent(PostEdit model)
+        {
+
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Posts
+                    .Single(e => e.PostID == model.PostID && e.PostUserID == _userID);
+
+                entity.PostID = model.PostID;
+                entity.PostUserID = model.PostUserID;
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.ModifiedUTC = DateTimeOffset.Now;
+
+
+                return ctx.SaveChanges() == 1;
+
+
+            }
+        }
 
 
     } // END Post Service
