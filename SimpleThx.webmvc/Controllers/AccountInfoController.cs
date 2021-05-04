@@ -46,7 +46,7 @@ namespace SimpleThx.webmvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult CreateAccountInfo(AccountInfoCreate model, HttpPostedFileBase upload)
+        public ActionResult CreateAccountInfo(AccountInfoCreate model)
         {
 
             var service = CreateAccountInfoService();
@@ -57,25 +57,24 @@ namespace SimpleThx.webmvc.Controllers
             }
 
 
-            //var validImageTypes = new string[]
-            //     {
-            //        "image/gif",
-            //        "image/jpeg",
-            //        "image/pjpeg",
-            //        "image/png"
-            //     };
-            
-            //if (model.PictureImage == null)
-            //{
-            //    ModelState.AddModelError("ImageUpload", "This field is required");
-            //}
-            //else if (!validImageTypes.Contains(model.PictureImage.ContentType))
-            //{
-            //    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
-            //}
+            var validImageTypes = new string[]
+                 {
+                    "image/gif",
+                    "image/jpeg",
+                    "image/png"
+                 };
 
-           
-                if (service.CreateAccountInfo(model))
+            if (model.PictureImage == null)
+            {
+                ModelState.AddModelError("ImageUpload", "This field is required");
+            }
+            else if (!validImageTypes.Contains(model.PictureImage.ContentType))
+            {
+                ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            }
+
+
+            if (service.CreateAccountInfo(model))
             {
                 TempData["SaveResult"] = "Your Account info was created!";
                 return RedirectToAction("Index");

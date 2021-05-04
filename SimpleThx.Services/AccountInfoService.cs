@@ -18,8 +18,6 @@ namespace SimpleThx.Services
             _userID = userID;
         }
 
-
-        // public bool CreateAccountInfo(AccountInfoCreate model, string uniqueFileName)
         public bool CreateAccountInfo(AccountInfoCreate model)
         {
 
@@ -45,39 +43,28 @@ namespace SimpleThx.Services
             }
         }
 
-        public string UploadedFile(AccountInfoCreate model)
+        public string UploadedFile(AccountInfoCreate model) // creates the unique URL and loads the image into the file folder
         {
 
             string uniqueFileName = "";
 
-            //if (model.PictureImage != null)
-            //{
+            if (model.PictureImage != null)
+            {
+
+
+                string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/Images");
+
+                uniqueFileName = Guid.NewGuid().ToString() + "-" + model.PictureImage.FileName;
+
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                model.PictureImage.SaveAs(filePath);
                 
-
-            //    string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/Images");
-
-            //    uniqueFileName = Guid.NewGuid().ToString() + " " + model.PictureImage.FileName;
-
-            //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        model.PictureImage.CopyTo(fileStream);
-            //    }
-            //}
+            }
 
             return uniqueFileName;
                
         }
-
-
-        //public string GetUniqueFileName(string fileName)
-        //{
-        //    fileName = Path.GetFileName(fileName);
-        //    return Path.GetFileNameWithoutExtension(fileName)
-        //              + "_"
-        //              + Guid.NewGuid().ToString().Substring(0, 4)
-        //              + Path.GetExtension(fileName);
-        //}
 
 
         public IEnumerable<AccountInfoList> GetAccountInfo()

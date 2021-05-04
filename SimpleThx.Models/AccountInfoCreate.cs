@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace SimpleThx.Models
 {
@@ -38,7 +39,7 @@ namespace SimpleThx.Models
         public string Country { get; set; }
 
         [DataType(DataType.Upload)]
-        public byte[] PictureImage { get; set; }
+        public HttpPostedFileBase PictureImage { get; set; }
 
         [DisplayName("Created")]
         public DateTimeOffset CreateUTC { get; set; }
