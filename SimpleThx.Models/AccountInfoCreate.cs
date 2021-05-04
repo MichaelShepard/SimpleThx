@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -36,7 +37,9 @@ namespace SimpleThx.Models
         [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string Country { get; set; }
 
-        public string PictureURL { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile PictureImage { get; set; }
 
         [DisplayName("Created")]
         public DateTimeOffset CreateUTC { get; set; }

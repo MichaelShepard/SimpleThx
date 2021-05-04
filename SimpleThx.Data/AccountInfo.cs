@@ -30,6 +30,8 @@ namespace SimpleThx.Data
         [Required]
         public string Country { get; set; }
 
+       
+        [DataType(DataType.ImageUrl)]
         public string PictureURL { get; set; }
 
         public DateTimeOffset CreateUTC { get; set; }

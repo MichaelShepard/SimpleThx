@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Http;
 using SimpleThx.Models;
 using SimpleThx.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,8 +13,18 @@ namespace SimpleThx.webmvc.Controllers
 {
 
     [Authorize]
+
     public class AccountInfoController : Controller
     {
+
+        //private readonly IWebHostEnvironment _rootpath;
+
+        //public AccountInfoController(IWebHostEnvironment rootpath)
+        //{
+        //    _rootpath = rootpath;
+        //}
+
+
         // GET: AccountInfo List Page
         public ActionResult Index()
         {
@@ -37,15 +49,40 @@ namespace SimpleThx.webmvc.Controllers
         public ActionResult CreateAccountInfo(AccountInfoCreate model)
         {
 
+            var service = CreateAccountInfoService();
+
             if (!ModelState.IsValid) // This needs to be if not 
             {
                 return View(model);
             }
 
-            var service = CreateAccountInfoService();
+
+            //var validImageTypes = new string[]
+            //     {
+            //        "image/gif",
+            //        "image/jpeg",
+            //        "image/pjpeg",
+            //        "image/png"
+            //     };
+            
+            //if (model.PictureImage == null)
+            //{
+            //    ModelState.AddModelError("ImageUpload", "This field is required");
+            //}
+            //else if (!validImageTypes.Contains(model.PictureImage.ContentType))
+            //{
+            //    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            //}
 
 
-            if (service.CreateAccountInfo(model))
+
+            //string uniqueFileName = service.GetUniqueFileName(model.PictureImage.FileName);
+
+
+
+
+            //if (service.CreateAccountInfo(model, uniqueFileName))
+                if (service.CreateAccountInfo(model))
             {
                 TempData["SaveResult"] = "Your Account info was created!";
                 return RedirectToAction("Index");
@@ -53,7 +90,7 @@ namespace SimpleThx.webmvc.Controllers
 
             ModelState.AddModelError("", "Account Info could not be created.");
             return View(model);
-
+            
         }
 
         public ActionResult EditAccountInfo (int id)
