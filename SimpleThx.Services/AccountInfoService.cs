@@ -22,6 +22,9 @@ namespace SimpleThx.Services
         // public bool CreateAccountInfo(AccountInfoCreate model, string uniqueFileName)
         public bool CreateAccountInfo(AccountInfoCreate model)
         {
+
+            string uniqueFileName = UploadedFile(model);
+
             var entity = new AccountInfo()
             {
 
@@ -30,7 +33,7 @@ namespace SimpleThx.Services
                 LastName = model.LastName,
                 State = model.State,
                 Country = model.Country,
-                //PictureURL = uniqueFileName,
+                PictureURL = uniqueFileName,
                 CreateUTC = DateTimeOffset.Now
 
             };
@@ -42,50 +45,39 @@ namespace SimpleThx.Services
             }
         }
 
-        //public string UploadedFile(AccountInfoCreate model)
-        //{
+        public string UploadedFile(AccountInfoCreate model)
+        {
 
-        //    string uniqueFileName = null;
+            string uniqueFileName = "";
 
-        //    if (model.PictureImage != null)
-        //    {
-
-        //        var uploadDir = "~/Content/Images"
-
-        //             //var filePath = Path.Combine(uploads, uniqueFileName);
-        //            var imagePath = Path.Combine(Server.MapPath(uploadDir), model.PictureImage.FileName);
-
-
-
-
-
-
-        //        var uniqueFileName = GetUniqueFileName(model.PictureImage.FileName);
-        //        var uploads = Path.Combine(hostingEnvironment.WebRootPath, "Images");
-               
-        //        model.PictureImage.CopyTo(new FileStream(filePath, FileMode.Create));
-
+            //if (model.PictureImage != null)
+            //{
                 
 
+            //    string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/Images");
 
+            //    uniqueFileName = Guid.NewGuid().ToString() + " " + model.PictureImage.FileName;
 
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            model.PictureImage.CopyTo(fileStream);
-        //        }
-        //    }
-        //    return uniqueFileName;
-        //}
+            //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
+            //    {
+            //        model.PictureImage.CopyTo(fileStream);
+            //    }
+            //}
 
-
-        public string GetUniqueFileName(string fileName)
-        {
-            fileName = Path.GetFileName(fileName);
-            return Path.GetFileNameWithoutExtension(fileName)
-                      + "_"
-                      + Guid.NewGuid().ToString().Substring(0, 4)
-                      + Path.GetExtension(fileName);
+            return uniqueFileName;
+               
         }
+
+
+        //public string GetUniqueFileName(string fileName)
+        //{
+        //    fileName = Path.GetFileName(fileName);
+        //    return Path.GetFileNameWithoutExtension(fileName)
+        //              + "_"
+        //              + Guid.NewGuid().ToString().Substring(0, 4)
+        //              + Path.GetExtension(fileName);
+        //}
 
 
         public IEnumerable<AccountInfoList> GetAccountInfo()

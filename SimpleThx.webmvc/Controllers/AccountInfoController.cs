@@ -46,7 +46,7 @@ namespace SimpleThx.webmvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult CreateAccountInfo(AccountInfoCreate model)
+        public ActionResult CreateAccountInfo(AccountInfoCreate model, HttpPostedFileBase upload)
         {
 
             var service = CreateAccountInfoService();
@@ -74,14 +74,7 @@ namespace SimpleThx.webmvc.Controllers
             //    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
             //}
 
-
-
-            //string uniqueFileName = service.GetUniqueFileName(model.PictureImage.FileName);
-
-
-
-
-            //if (service.CreateAccountInfo(model, uniqueFileName))
+           
                 if (service.CreateAccountInfo(model))
             {
                 TempData["SaveResult"] = "Your Account info was created!";

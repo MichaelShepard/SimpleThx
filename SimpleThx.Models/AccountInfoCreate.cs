@@ -15,7 +15,7 @@ namespace SimpleThx.Models
         public Guid UserID { get; set; }
 
         [DisplayName("First Name")]
-        [Required (ErrorMessage = "First Name is required")]
+        [Required(ErrorMessage = "First Name is required")]
         [MaxLength(100, ErrorMessage = "Must be less than 100 characters")]
         [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string FirstName { get; set; }
@@ -37,9 +37,8 @@ namespace SimpleThx.Models
         [RegularExpression(@"^[a-zA-Z]+(\s+[a-zA-Z]+)*$", ErrorMessage = "Use letters only please")]
         public string Country { get; set; }
 
-
         [DataType(DataType.Upload)]
-        public IFormFile PictureImage { get; set; }
+        public byte[] PictureImage { get; set; }
 
         [DisplayName("Created")]
         public DateTimeOffset CreateUTC { get; set; }
