@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Http;
 using SimpleThx.Models;
 using SimpleThx.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,8 +13,18 @@ namespace SimpleThx.webmvc.Controllers
 {
 
     [Authorize]
+
     public class AccountInfoController : Controller
     {
+
+        //private readonly IWebHostEnvironment _rootpath;
+
+        //public AccountInfoController(IWebHostEnvironment rootpath)
+        //{
+        //    _rootpath = rootpath;
+        //}
+
+
         // GET: AccountInfo List Page
         public ActionResult Index()
         {
@@ -37,12 +49,24 @@ namespace SimpleThx.webmvc.Controllers
         public ActionResult CreateAccountInfo(AccountInfoCreate model)
         {
 
+            var service = CreateAccountInfoService();
+
+            var validImageTypes = new string[]
+                 {
+                    "image/gif",
+                    "image/jpeg",
+                    "image/png"
+                 };
+
+            if (model.PictureImage != null && !validImageTypes.Contains(model.PictureImage.ContentType))
+            {
+                ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            }
+
             if (!ModelState.IsValid) // This needs to be if not 
             {
                 return View(model);
             }
-
-            var service = CreateAccountInfoService();
 
 
             if (service.CreateAccountInfo(model))
@@ -53,7 +77,7 @@ namespace SimpleThx.webmvc.Controllers
 
             ModelState.AddModelError("", "Account Info could not be created.");
             return View(model);
-
+            
         }
 
         public ActionResult EditAccountInfo (int id)
@@ -77,7 +101,22 @@ namespace SimpleThx.webmvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAccountInfo(int id, AccountInfoEdit model)
         {
-             if (!ModelState.IsValid) return View(model);
+
+            var service = CreateAccountInfoService();
+
+            var validImageTypes = new string[]
+                 {
+                    "image/gif",
+                    "image/jpeg",
+                    "image/png"
+                 };
+
+            if (model.PictureImage != null && !validImageTypes.Contains(model.PictureImage.ContentType))
+            {
+                ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            }
+           
+            if (!ModelState.IsValid) return View(model);
 
              if(model.AccountID != id) // not sure this is needed
               {
@@ -85,7 +124,6 @@ namespace SimpleThx.webmvc.Controllers
                  return View(model);
               }
 
-            var service = CreateAccountInfoService();
 
             if (service.UpdateAccountInfo(model))
             {

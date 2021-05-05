@@ -2,6 +2,7 @@
 using SimpleThx.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,9 @@ namespace SimpleThx.Services
 
         public bool CreateAccountInfo(AccountInfoCreate model)
         {
+
+            string uniqueFileName = UploadedFile(model);
+
             var entity = new AccountInfo()
             {
 
@@ -27,6 +31,7 @@ namespace SimpleThx.Services
                 LastName = model.LastName,
                 State = model.State,
                 Country = model.Country,
+                PictureURL = uniqueFileName,
                 CreateUTC = DateTimeOffset.Now
 
             };
@@ -37,6 +42,32 @@ namespace SimpleThx.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public string UploadedFile(AccountInfoCreate model) // creates the unique URL and loads the image into the file folder
+        {
+
+            string uniqueFileName = "";
+
+            if (model.PictureImage != null)
+            {
+                string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/Images");
+
+                uniqueFileName = Guid.NewGuid().ToString() + "-" + model.PictureImage.FileName;
+
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                model.PictureImage.SaveAs(filePath);
+                
+            } else if (model.PictureImage == null)
+            {
+
+                return uniqueFileName = "default-avatar-image.jpg";
+            }
+
+            return uniqueFileName;
+               
+        }
+
 
         public IEnumerable<AccountInfoList> GetAccountInfo()
         {
@@ -52,8 +83,8 @@ namespace SimpleThx.Services
                         FirstName = e.FirstName,
                         LastName = e.LastName,
                         State = e.State,
-                        Country = e.Country
-
+                        Country = e.Country,
+                        PictureURL = e.PictureURL
                     });
 
                 return query.ToArray();
@@ -87,6 +118,9 @@ namespace SimpleThx.Services
 
         public bool UpdateAccountInfo(AccountInfoEdit model)
         {
+
+            string uniqueFileName = NewUploadedFile(model);
+
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx
@@ -98,13 +132,37 @@ namespace SimpleThx.Services
                 entity.LastName = model.LastName;
                 entity.State = model.State;
                 entity.Country = model.Country;
+                entity.PictureURL = uniqueFileName;
                 entity.ModifiedUTC = DateTimeOffset.Now;
 
                 return ctx.SaveChanges() == 1;
             }
         }
 
+        public string NewUploadedFile(AccountInfoEdit model) // creates the unique URL and loads the image into the file folder
+        {
 
+            string uniqueFileName = "";
+
+            if (model.PictureImage != null)
+            {
+                string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/Images");
+
+                uniqueFileName = Guid.NewGuid().ToString() + "-" + model.PictureImage.FileName;
+
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                model.PictureImage.SaveAs(filePath);
+
+            } else if (model.PictureImage == null)
+            {
+
+                return uniqueFileName = "default-avatar-image.jpg";
+            }
+
+            return uniqueFileName;
+
+        }
 
 
     } // END Account Info Service
