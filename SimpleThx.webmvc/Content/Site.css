@@ -46,11 +46,6 @@ section {
         position: relative;
     }
 
-        
-
-   
-
-
 
 /* playfair-display-regular - latin */
 @font-face {
@@ -104,9 +99,39 @@ section {
     url('../fonts/roboto-v27-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
 }
 
+/*--------------------------------------------------------------
+# Header Social Links
+--------------------------------------------------------------*/
+.header-social-links {
+    margin: 0 0 0 30px;
+}
+
+    .header-social-links a {
+        color: #9ba6af;
+        padding-left: 8px;
+        display: inline-block;
+        line-height: 0px;
+        transition: 0.3s;
+    }
+
+        .header-social-links a i {
+            line-height: 0;
+        }
+
+        .header-social-links a:hover {
+            color: #E76F51;
+        }
+
+@media (max-width: 768px) {
+    .header-social-links {
+        margin: 0 15px 0 0;
+    }
+}
 
 
-
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
 #hero {
     width: 100%;
     height: 60vh;
@@ -184,6 +209,10 @@ section {
 }
 
 
+/*--------------------------------------------------------------
+# Stripe
+--------------------------------------------------------------*/
+
 #stripe {
     width: 100%;
     position: relative;
@@ -234,15 +263,11 @@ section {
             left: calc(50% - 20px);
         }
 
-
     .how-we-do .section-title p {
         margin-bottom: 0;
         color: #fff;
         font-size: 20px;
     }
-
-
-
 
 .how-we-do .icon-box {
     text-align: center;
@@ -266,8 +291,6 @@ section {
         margin-bottom: 20px;
         transition: ease-in-out 0.3s;
     }
-
-        
 
     .how-we-do .icon-box h4 {
         font-weight: 700;
@@ -496,7 +519,9 @@ section {
     }
 }
 
-
+/*--------------------------------------------------------------
+# Footer Section
+--------------------------------------------------------------*/
 #footer {
     color: #444444;
     font-size: 14px;
@@ -512,7 +537,7 @@ section {
     #footer .social-links a {
         font-size: 18px;
         display: inline-block;
-        background: #3498db;
+        background: #9ba6af;
         color: #fff;
         line-height: 1;
         padding: 8px 0;
@@ -525,7 +550,7 @@ section {
     }
 
         #footer .social-links a:hover {
-            background: #5faee3;
+            background: #E76F51;
             color: #fff;
             text-decoration: none;
         }

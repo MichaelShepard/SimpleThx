@@ -25,14 +25,11 @@
 
 <body class="bodycontainer">
 
-
-
     <div class="navbar navbar-expand-lg sticky-top navbar-light  bg-light">
         <div class="container">
 
             <nav class="navbar navbar-light bg-light">
                 @Html.ActionLink("SimpleThx", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -64,7 +61,12 @@
 
                 </div>
             </nav>
-
+            <div class="header-social-links d-flex align-items-right">
+                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                
+            </div>
 
 
         </div> <!-- END Container-->
@@ -84,19 +86,15 @@
                     &copy; Copyright <strong><span>Simple THX</span></strong>. All Rights Reserved
                 </div>
             </div>
-            <div class="social-links text-center text-md-right pt-3 pt-md-0">
-                <a href="#" class="twitter"><i class="fab fa-twitterr"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0 col-10">
+                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                
             </div>
         </div>
     </footer><!-- End Footer -->
-
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Simple Thx</p>
-    </footer>
+    
 
 
     @Scripts.Render("~/bundles/jquery")

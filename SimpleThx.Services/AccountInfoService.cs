@@ -50,8 +50,6 @@ namespace SimpleThx.Services
 
             if (model.PictureImage != null)
             {
-
-
                 string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/Images");
 
                 uniqueFileName = Guid.NewGuid().ToString() + "-" + model.PictureImage.FileName;
@@ -60,6 +58,10 @@ namespace SimpleThx.Services
 
                 model.PictureImage.SaveAs(filePath);
                 
+            } else if (model.PictureImage == null)
+            {
+
+                return uniqueFileName = "default-avatar-image.jpg";
             }
 
             return uniqueFileName;
@@ -116,6 +118,9 @@ namespace SimpleThx.Services
 
         public bool UpdateAccountInfo(AccountInfoEdit model)
         {
+
+            string uniqueFileName = NewUploadedFile(model);
+
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx
@@ -127,13 +132,37 @@ namespace SimpleThx.Services
                 entity.LastName = model.LastName;
                 entity.State = model.State;
                 entity.Country = model.Country;
+                entity.PictureURL = uniqueFileName;
                 entity.ModifiedUTC = DateTimeOffset.Now;
 
                 return ctx.SaveChanges() == 1;
             }
         }
 
+        public string NewUploadedFile(AccountInfoEdit model) // creates the unique URL and loads the image into the file folder
+        {
 
+            string uniqueFileName = "";
+
+            if (model.PictureImage != null)
+            {
+                string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content/Images");
+
+                uniqueFileName = Guid.NewGuid().ToString() + "-" + model.PictureImage.FileName;
+
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                model.PictureImage.SaveAs(filePath);
+
+            } else if (model.PictureImage == null)
+            {
+
+                return uniqueFileName = "default-avatar-image.jpg";
+            }
+
+            return uniqueFileName;
+
+        }
 
 
     } // END Account Info Service

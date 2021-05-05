@@ -58,11 +58,7 @@ namespace SimpleThx.webmvc.Controllers
                     "image/png"
                  };
 
-            if (model.PictureImage == null || model.PictureImage.ContentLength == 0)
-            {
-                ModelState.AddModelError("ImageUpload", "This field is required");
-            }
-            else if (!validImageTypes.Contains(model.PictureImage.ContentType))
+            if (model.PictureImage != null && !validImageTypes.Contains(model.PictureImage.ContentType))
             {
                 ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
             }
@@ -105,7 +101,22 @@ namespace SimpleThx.webmvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditAccountInfo(int id, AccountInfoEdit model)
         {
-             if (!ModelState.IsValid) return View(model);
+
+            var service = CreateAccountInfoService();
+
+            var validImageTypes = new string[]
+                 {
+                    "image/gif",
+                    "image/jpeg",
+                    "image/png"
+                 };
+
+            if (model.PictureImage != null && !validImageTypes.Contains(model.PictureImage.ContentType))
+            {
+                ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            }
+           
+            if (!ModelState.IsValid) return View(model);
 
              if(model.AccountID != id) // not sure this is needed
               {
@@ -113,7 +124,6 @@ namespace SimpleThx.webmvc.Controllers
                  return View(model);
               }
 
-            var service = CreateAccountInfoService();
 
             if (service.UpdateAccountInfo(model))
             {
