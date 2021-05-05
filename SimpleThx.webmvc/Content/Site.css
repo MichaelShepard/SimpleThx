@@ -10,6 +10,7 @@
 }
 
 .bodycontainer {
+    background-color: #264653;
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -30,7 +31,7 @@ section {
 }
 
 .section-bg {
-    background-color: #264653;
+    background-color: #f7fbfe;
 }
 
 .section-title {
