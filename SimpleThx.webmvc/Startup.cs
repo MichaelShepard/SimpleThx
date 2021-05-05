@@ -9,6 +9,7 @@ namespace SimpleThx.webmvc
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            
         }
     }
 }

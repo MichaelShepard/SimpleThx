@@ -4,7 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Account Information</h2>
+@if (Session["Email"] != null)
+{
+    <h2>Account Information</h2>
+    <h3>Welcome @Session["Email"].ToString()</h3>
+}
+
+
 
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -17,9 +23,13 @@
     </div>
 }
 
+<h2>Account Information</h2>
+
 <table class="table">
     <tr>
-
+        <th>
+            @Html.DisplayNameFor(model => model.PictureURL)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -32,14 +42,16 @@
         <th>
             @Html.DisplayNameFor(model => model.Country)
         </th>
-        
+
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
 <tr>
-
+    <td>
+        <img src="~/Content/Images/@item.PictureURL" class="rounded-circle" height="40" width="40" asp-append-version="true" />
+        </td>
     <td>
         @Html.DisplayFor(modelItem => item.FirstName)
     </td>
@@ -52,9 +64,9 @@
     <td>
         @Html.DisplayFor(modelItem => item.Country)
     </td>
-    
+
     <td>
-        @Html.ActionLink("Edit", "EditAccountInfo", new { id = item.AccountID }) 
+        @Html.ActionLink("Edit", "EditAccountInfo", new { id = item.AccountID })
     </td>
 </tr>
     }

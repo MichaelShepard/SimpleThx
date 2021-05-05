@@ -7,7 +7,7 @@
 <h2>Update Account Information</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditAccountInfo", "AccountInfo", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -57,6 +57,13 @@
 
             @Html.DropDownListFor(model => model.Country, SimpleThx.webmvc.Controllers.SelectListItemHelper.GetCountryList())
             @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <!--Button to add image to profile-->
+    <div class="form-group">
+        <div class="editor-field">
+            <input type="file" name="PictureImage" id="PictureImage" />
         </div>
     </div>
 

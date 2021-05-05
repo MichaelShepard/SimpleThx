@@ -4,19 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Simple Thanks</title>
+
+
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/custom")  <!-- This adds custom javascript from the Sites file in Scripts/custom -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Elsie" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
+    <!-- FontAwesome Icons -->
+    <script src="@Url.Content("https://kit.fontawesome.com/d9dcf85432.js")"></script>
 
 </head>
-<body>
+
+
+<body class="bodycontainer">
 
     <div class="navbar navbar-expand-lg sticky-top navbar-light  bg-light">
         <div class="container">
 
             <nav class="navbar navbar-light bg-light">
-                @Html.ActionLink("SimpleThx", "Index", "Home", new { area = "" }, new {@class = "navbar-brand" })
-
+                @Html.ActionLink("SimpleThx", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -40,32 +53,59 @@
                                 </div>
                             </li>
 
-                          }
+                        }
 
-                     </ul>
+                    </ul>
 
                     @Html.Partial("_LoginPartial")
 
                 </div>
             </nav>
-
+            <div class="header-social-links d-flex align-items-right">
+                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                
+            </div>
 
 
         </div> <!-- END Container-->
     </div> <!-- END Larger Nav Bar Class-->
+
+
+
+
+    @RenderBody()
+    <hr />
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container d-md-flex py-4">
+
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Simple THX</span></strong>. All Rights Reserved
+                </div>
+            </div>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0 col-10">
+                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                
+            </div>
+        </div>
+    </footer><!-- End Footer -->
     
 
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Simple Thx</p>
-        </footer>
-    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+    <!--Used to run the counter one the home page-->
+    <script src="@Url.Content("https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js")"></script>
+
+
+
 </body>
 </html>
