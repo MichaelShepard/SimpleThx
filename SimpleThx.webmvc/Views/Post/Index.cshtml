@@ -4,106 +4,111 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Posts</h2>
+
+<Section id="posts">
+    <div class="container">
+        <h2>My Posts</h2>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            <a>About</a>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUTC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
+        <table class="table table-hover table-responsive">
+            <thead class="table-borderless">
+                <tr class="table-borderless">
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        <a>About</a>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateUTC)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
 
-    @foreach (var item in Model)
-    {
+                    @Html.HiddenFor(modelItem => item.AboutUserID)
+                    @Html.HiddenFor(modelItem => item.UserID)
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @if (item.AboutUserID == item.UserID)
+                            {
+                                <a>Me</a>
+                            }
+                            else if (item.PostUserID == item.UserID)
+                            {
+                                <a>You</a>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateUTC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
 
-        @Html.HiddenFor(modelItem => item.AboutUserID)
-        @Html.HiddenFor(modelItem => item.UserID)
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.FullName)
-    </td>
-    <td>
-        @if (item.AboutUserID == item.UserID)
-        {
-            <a>Me</a>
+                            @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
+                            {
+                                <input class="btn btn-outline-secondary centered" class="btn btn-light" type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 1 }))'" />
 
-        }
-        else if (item.PostUserID == item.UserID)
-        {
-            <a>You</a>
-        }
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Title)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Content)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CreateUTC)
-    </td>
-    <th>
-        @Html.DisplayFor(modelItem => item.Status)
-    </th>
-    <td>
+                            }
+                            else if (item.Status == SimpleThx.Data.Status.Accepted)
+                            {
 
-        @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
-        {
-            <input type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 1 }))'" />
+                            }
 
-        }
-        else if (item.Status == SimpleThx.Data.Status.Accepted)
-        {
+                        </td>
+                        <td>
 
-        }
+                            @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
+                            {
+                                <input class="btn btn-outline-secondary centered" type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 2 }))'" />
+                            }
 
-    </td>
-    <td>
+                        </td>
 
-        @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
-        {
-            <input type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 2 }))'" />
-        }
+                        <td>
 
-    </td>
+                            @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID == item.UserID)
+                            {
+                                <input class="btn btn-outline-secondary centered" type="button" value="Update" onclick="location.href='@Html.Raw(@Url.Action("EditPost", "Post", new { @id = item.PostID}))'" />
+                            }
 
-    <td>
+                        </td>
 
-        @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID == item.UserID)
-        {
-            <input type="button" value="Update" onclick="location.href='@Html.Raw(@Url.Action("EditPost", "Post", new { @id = item.PostID}))'" />
-        }
+                        <td>
 
-    </td>
+                            @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID != item.UserID)
+                            {
+                                <input class="btn btn-outline-secondary centered" type="button" value="Comment" onclick="location.href='@Html.Raw(@Url.Action("CreateComment", "Comment", new { @id = item.PostID}))'" />
+                            }
 
-    <td>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</Section>
 
-        @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID != item.UserID)
-        {
-            <input type="button" value="Comment" onclick="location.href='@Html.Raw(@Url.Action("CreateComment", "Comment", new { @id = item.PostID}))'" />
-        }
-
-    </td>
-
-
-</tr>
-    }
-
-</table>

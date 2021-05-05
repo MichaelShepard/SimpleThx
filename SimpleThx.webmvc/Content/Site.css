@@ -1,6 +1,5 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -46,6 +45,8 @@ section {
         padding-bottom: 20px;
         position: relative;
     }
+
+
 
 
 /* playfair-display-regular - latin */
@@ -99,6 +100,16 @@ section {
     url('../fonts/roboto-v27-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
     url('../fonts/roboto-v27-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
 }
+
+
+/*--------------------------------------------------------------
+# Header Social Links
+--------------------------------------------------------------*/
+#navbarStuff {
+    border-bottom: 2px solid #E76F51; 
+
+}
+
 
 /*--------------------------------------------------------------
 # Header Social Links
@@ -525,6 +536,7 @@ section {
     color: #444444;
     font-size: 14px;
     background: #f7fbfe;
+    border-top: 2px solid #E76F51;
 }
 
     #footer .credits {
@@ -623,4 +635,22 @@ section {
 --------------------------------------------------------------*/
 *, *:focus, *:hover {
     outline: none;
+}
+
+
+
+
+/*--------------------------------------------------------------
+# Posts Page
+--------------------------------------------------------------*/
+
+#posts {
+    background: #fff;
+    font-family: Roboto;
+}
+
+#posts h2 {
+    font-family: Elsie;
+    color: #E76F51;
+    font-size: 50px;
 }
