@@ -50,6 +50,5 @@ namespace SimpleThx.Data
         public virtual ICollection<Comment> Comments { get; set; }
 
 
-
     } // END Post Class
  }  // END Namespace
