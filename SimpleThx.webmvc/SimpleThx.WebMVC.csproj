@@ -422,6 +422,7 @@
     <Folder Include="Content\Fonts\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\SiteImages\" />
+
     <Folder Include="Views\StateCountry\" />
   </ItemGroup>
   <ItemGroup>

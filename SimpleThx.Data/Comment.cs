@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleThx.Data
 {
+
     public enum CommentStatus
     {
         Accept = 1,
@@ -45,3 +46,4 @@ namespace SimpleThx.Data
 
     } // END Commment CLass
 } // END NameSpace
+
