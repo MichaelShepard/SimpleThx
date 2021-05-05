@@ -81,8 +81,8 @@ namespace SimpleThx.Services
                         FirstName = e.FirstName,
                         LastName = e.LastName,
                         State = e.State,
-                        Country = e.Country
-
+                        Country = e.Country,
+                        PictureURL = e.PictureURL
                     });
 
                 return query.ToArray();

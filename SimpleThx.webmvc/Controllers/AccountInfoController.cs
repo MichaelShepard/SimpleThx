@@ -51,12 +51,6 @@ namespace SimpleThx.webmvc.Controllers
 
             var service = CreateAccountInfoService();
 
-            if (!ModelState.IsValid) // This needs to be if not 
-            {
-                return View(model);
-            }
-
-
             var validImageTypes = new string[]
                  {
                     "image/gif",
@@ -64,13 +58,18 @@ namespace SimpleThx.webmvc.Controllers
                     "image/png"
                  };
 
-            if (model.PictureImage == null)
+            if (model.PictureImage == null || model.PictureImage.ContentLength == 0)
             {
                 ModelState.AddModelError("ImageUpload", "This field is required");
             }
             else if (!validImageTypes.Contains(model.PictureImage.ContentType))
             {
                 ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            }
+
+            if (!ModelState.IsValid) // This needs to be if not 
+            {
+                return View(model);
             }
 
 
