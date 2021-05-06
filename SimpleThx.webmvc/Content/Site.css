@@ -660,7 +660,7 @@ section {
     }
 
 /*--------------------------------------------------------------
-# Posts Page
+# Comments Page
 --------------------------------------------------------------*/
 
 #comments {
@@ -811,3 +811,66 @@ section {
         #create-comment textarea:focus {
             border: 2px solid #E76F51;
         }
+
+/*--------------------------------------------------------------
+# AccountInfo Page
+--------------------------------------------------------------*/
+
+#account-info {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #account-info h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+/*--------------------------------------------------------------
+# Create Account Info Section
+--------------------------------------------------------------*/
+
+#account-info-create {
+    font-size: 18px;
+    background: #fff;
+    font-family: Roboto;
+}
+
+#account-info-edit h2 {
+    font-family: Elsie;
+    color: #E76F51;
+    font-size: 50px;
+}
+
+#account-info-edit a {
+    color: #264653;
+}
+
+#account-info-edit input {
+    font-family: Roboto;
+    font-size: 15px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+    #account-info-edit input:focus {
+        border: 2px solid #E76F51;
+    }
+
+/*--------------------------------------------------------------
+# Image Upload Section
+--------------------------------------------------------------*/
+
+
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
