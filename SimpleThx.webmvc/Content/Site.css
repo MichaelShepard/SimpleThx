@@ -723,7 +723,6 @@ section {
 --------------------------------------------------------------*/
 
 #create-post {
-    
     font-size: 18px;
     background: #fff;
     font-family: Roboto;
@@ -739,22 +738,76 @@ section {
         color: #264653;
     }
 
-#create-post input {
-    font-family: Roboto;
-    font-size: 15px;
-    height: 40px;
-    border-radius: 5px;
-}
-
-    #create-post input:focus {
-        border: 3px solid #E76F51;
-    }
-
-    #create-post textarea {
-        width: 100%;
+    #create-post input {
         font-family: Roboto;
         font-size: 15px;
         height: 40px;
         border-radius: 5px;
-        border: 1px solid #dee2e6;
     }
+
+        #create-post input:focus {
+            border: 2px solid #E76F51;
+        }
+
+    #create-post textarea {
+        width: 100%;
+        font-family: Roboto;
+        color: #6c757d;
+        font-size: 15px;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+        padding-top: 5px;
+        padding-left: 10px;
+    }
+
+        #create-post textarea:focus {
+            border: 2px solid #E76F51;
+        }
+
+/*--------------------------------------------------------------
+# Create Post Section
+--------------------------------------------------------------*/
+
+#create-comment {
+    font-size: 18px;
+    background: #fff;
+    font-family: Roboto;
+}
+
+    #create-comment h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+    #create-comment a {
+        color: #264653;
+    }
+
+    #create-comment input {
+        font-family: Roboto;
+        font-size: 15px;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+        #create-comment input:focus {
+            border: 2px solid #E76F51;
+        }
+
+    #create-comment textarea {
+        width: 100%;
+        font-family: Roboto;
+        color: #6c757d;
+        font-size: 15px;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+        padding-top: 5px;
+        padding-left: 10px;
+    }
+
+        #create-comment textarea:focus {
+            border: 2px solid #E76F51;
+        }
