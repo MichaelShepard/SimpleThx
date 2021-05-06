@@ -179,16 +179,16 @@ namespace SimpleThx.Services
                     State = e.State,
                     Country = e.Country
 
-                }).ToList();
+                });
 
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    allAccounts = allAccounts.Where(e => e.FullName.Contains(searchString)).ToList();
+                    allAccounts = allAccounts.Where(e => e.FullName.Contains(searchString));
 
                 }
 
-                return allAccounts;
+                return allAccounts.ToList();
 
             }
         }

@@ -31,6 +31,10 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
+                    <th></th> <!--Moves line to end of the row-->
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -69,7 +73,7 @@
 
                             @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
                             {
-                                <input class="btn btn-outline-secondary centered" type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 1 }))'" />
+                                <input class="btn btn-outline-secondary btn- centered" type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 1 }))'" />
 
                             }
                             else if (item.Status == SimpleThx.Data.Status.Accepted)
@@ -82,7 +86,7 @@
 
                             @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
                             {
-                                <input class="btn btn-outline-secondary centered" type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 2 }))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 2 }))'" />
                             }
 
                         </td>
@@ -91,7 +95,7 @@
 
                             @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID == item.UserID)
                             {
-                                <input class="btn btn-outline-secondary centered" type="button" value="Update" onclick="location.href='@Html.Raw(@Url.Action("EditPost", "Post", new { @id = item.PostID}))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" type="button" value="Update" onclick="location.href='@Html.Raw(@Url.Action("EditPost", "Post", new { @id = item.PostID}))'" />
                             }
 
                         </td>
@@ -100,7 +104,7 @@
 
                             @if (item.Status != SimpleThx.Data.Status.Declined && item.PostUserID != item.UserID)
                             {
-                                <input class="btn btn-outline-secondary centered" type="button" value="Comment" onclick="location.href='@Html.Raw(@Url.Action("CreateComment", "Comment", new { @id = item.PostID}))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" type="button" value="Comment" onclick="location.href='@Html.Raw(@Url.Action("CreateComment", "Comment", new { @id = item.PostID}))'" />
                             }
 
                         </td>

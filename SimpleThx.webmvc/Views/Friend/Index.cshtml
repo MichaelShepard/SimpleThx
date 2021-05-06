@@ -48,8 +48,10 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
-
-
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -84,7 +86,7 @@
 
                             @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
                             {
-                                <input class="btn btn-outline-secondary centered btn btn-light" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 1 }))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 1 }))'" />
 
                             }
                             else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
@@ -97,7 +99,7 @@
 
                             @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
                             {
-                                <input class="btn btn-outline-secondary centered" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 2 }))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 2 }))'" />
                             }
 
                         </td>
@@ -105,11 +107,11 @@
 
                             @if (item.Status == SimpleThx.Data.FriendStatus.Accepted && item.FriendSend == item.UserID)
                             {
-                                <input class="btn btn-outline-secondary centered" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendReceive}))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendReceive}))'" />
                             }
                             else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
                             {
-                                <input class="btn btn-outline-secondary centered" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendSend}))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendSend}))'" />
                             }
 
                         </td>
