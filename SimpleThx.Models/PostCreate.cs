@@ -25,6 +25,7 @@ namespace SimpleThx.Models
         [Required]
         [MaxLength(1000)]
         [Display(Name = "Content")]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
         public Status Status { get; set; }

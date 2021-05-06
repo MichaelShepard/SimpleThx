@@ -73,7 +73,7 @@
 
                             @if (item.Status == SimpleThx.Data.Status.Pending && item.AboutUserID == item.UserID)
                             {
-                                <input class="btn btn-outline-secondary btn- centered" type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 1 }))'" />
+                                <input class="btn btn-outline-secondary btn-sm centered" type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdatePost", "Post", new { @id = item.PostID, @status = 1 }))'" />
 
                             }
                             else if (item.Status == SimpleThx.Data.Status.Accepted)
