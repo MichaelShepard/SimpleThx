@@ -874,3 +874,20 @@ section {
     cursor: pointer;
 }
 
+/*--------------------------------------------------------------
+# Update Account Page
+--------------------------------------------------------------*/
+
+#change-password {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #change-password h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
