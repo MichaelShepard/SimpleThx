@@ -141,9 +141,15 @@ namespace SimpleThx.webmvc.Controllers
             return service;
         }
 
+        public ActionResult PostCommentList()
+        {
+            var service = CreatePostService();
+            var model = service.GetPostsComments();
+
+            return View(model);
+        }
 
 
-        
 
     } // END Post Controller
 } // END Namespace

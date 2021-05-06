@@ -891,3 +891,18 @@ section {
         color: #E76F51;
         font-size: 50px;
     }
+
+/*--------------------------------------------------------------
+# Post Comments  Section
+--------------------------------------------------------------*/
+
+#post-comment container {
+    font-size: 18px;
+    background: #fff;
+    font-family: Roboto;
+}
+
+#post-comment h2 {
+    font-family: Elsie;
+    color: #E76F51;
+    font-size: 50px;

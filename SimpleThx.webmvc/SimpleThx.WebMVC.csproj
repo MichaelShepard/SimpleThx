@@ -416,13 +416,13 @@
     <Content Include="Views\Post\EditPost.cshtml" />
     <Content Include="Views\Comment\CreateComment.cshtml" />
     <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Post\PostCommentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Fonts\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\SiteImages\" />
-
     <Folder Include="Views\StateCountry\" />
   </ItemGroup>
   <ItemGroup>

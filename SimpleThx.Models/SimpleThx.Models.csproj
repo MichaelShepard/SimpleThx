@@ -117,6 +117,7 @@
     <Compile Include="CommentList.cs" />
     <Compile Include="FriendCreate.cs" />
     <Compile Include="FriendList.cs" />
+    <Compile Include="PostCommentList.cs" />
     <Compile Include="PostCreate.cs" />
     <Compile Include="PostEdit.cs" />
     <Compile Include="PostList.cs" />

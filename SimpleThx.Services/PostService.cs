@@ -181,6 +181,39 @@ namespace SimpleThx.Services
             }
         }
 
+        public IEnumerable<PostCommentList> GetPostsComments()
+        {
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = from e in ctx.Posts
+                            where e.AboutUserID == _userID && e.Status != Status.Declined
+                            orderby e.CreateUTC, e.ModifiedUTC
+                            join d in ctx.Accounts on e.PostUserID equals d.UserID
+                            join r in ctx.Comments on e.PostID equals r.PostID
+
+                            select new PostCommentList
+                            {
+                                PostID = e.PostID,
+                                FullName = d.FirstName + " " + d.LastName,
+                                Title = e.Title,
+                                Content = e.Content,
+                                CommentID = r.CommentID,
+                                CommentorUserID = r.CommentorUserID,
+                                CommentContent = r.CommentContent,
+                                UserID = _userID,
+                                PostUserID = e.PostUserID,
+                                AboutUserID = e.AboutUserID,
+                                Status = e.Status,
+                                CreateUTC = e.CreateUTC
+
+                            };
+
+                return query.ToList();
+            }
+            
+
+        }
 
     } // END Post Service
 }  //END Namespace
