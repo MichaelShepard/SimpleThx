@@ -4,42 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Comments</h2>
+<Section id="comments">
+    <div class="container content">
+        <h2>My Comments</h2>
 
+        <table class="table table-hover table-responsive-md">    
+            <thead class="table-borderless">
+                <tr class="table-borderless">
+                    <th>
+                        @Html.DisplayNameFor(model => model.CommentContent)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateUTC)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CommentContent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUTC)
-        </th>
-        <th></th>
-    </tr>
+                        @Html.HiddenFor(modelItem => item.CommentID)
+                        @Html.HiddenFor(modelItem => item.CommentorUserID)
 
-@foreach (var item in Model) {
-<tr>
-
-    @Html.HiddenFor(modelItem => item.CommentID)
-    @Html.HiddenFor(modelItem => item.CommentorUserID)
-
-
-    <td>
-        @Html.DisplayFor(modelItem => item.CommentContent)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Title)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CreateUTC)
-    </td>
-
-
-</tr>
-}
-
-</table>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CommentContent)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateUTC)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</Section>

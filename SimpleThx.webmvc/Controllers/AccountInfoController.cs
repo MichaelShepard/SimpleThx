@@ -137,6 +137,19 @@ namespace SimpleThx.webmvc.Controllers
 
         }
 
+        public ActionResult CountUsersDatabase()
+        {
+
+            var service = CreateAccountInfoService();
+            
+
+
+             ViewData["userCount"] = service.CountUsersDatabase();
+
+            return View();
+
+        }
+
 
         // Helper Methods
         private AccountInfoService CreateAccountInfoService()
