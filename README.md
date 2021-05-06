@@ -15,25 +15,20 @@
 
 
 ## <a name="Introduction"></a>Introduction
-We all love movies and we all love to eat so we decided to combine the two (kind of like peanut butter & Jelly or chocolate and peanut butter). Is peanut butters super power making other things amazing? This app gives you the ability to find movies / TV shows and locate a scene to find a recipe from that scene. For example, if you wanted to make the $5 milkshake from Pulp Fiction, you would be able to find the scene and recipe for that scene. Or if you wanted a morocan recipe from Bourne Identity, you could search by location and find a recipe from that area. 
+Social Media today is all about me. I wanted to create a social media site that was all about you. You cannot post on your own profile. You have to post only about somebody else. Send them a compliment, kudo, that a boy! Whatever makes them happy. It's a simpleTHX 
 
 
 
 ## <a name="Features"></a>Features
-* Able to create, add, update, and delete media
-* Find media by location
-* Find Media by title
-* Get Recipes by title
-* Able to create, add, update, and delete locations
-* Able to create, add, update, and delete Media
-
+* Able to create, add, and update posts
+* Able to create, add, and update commments
+* Find friends and send requests
+* Accept or decline friend requests or posts
 
 
 ## <a name="Contributors"></a>Contributors
 
 * Mike Shepard  [GitHub Profile](https://github.com/MichaelShepard)
-
-
 
 
 ## <a name="Technologies"></a>Technologies
