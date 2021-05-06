@@ -59,5 +59,5 @@ Social Media today is all about me. I wanted to create a social media site that 
 
 ## <a name="Backers"></a>Backers
 
-![ElevenFifty](/Images/ElevenFiftyLogo.png)
+![ElevenFifty](/SimpleThx.webmvc/Content/SiteImages/ElevenFiftyLogo.png)
 
