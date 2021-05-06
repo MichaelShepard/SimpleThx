@@ -1,4 +1,4 @@
-# TvDinner - web app for food and TV
+# SimpleTHX - web app to send THX to your friends
 
 ![SimpleTHX](/SimpleThx.webmvc/Content/SiteImages/SimpleTHX%20Logo.png)
 
