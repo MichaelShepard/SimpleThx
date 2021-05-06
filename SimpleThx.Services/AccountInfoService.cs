@@ -164,6 +164,21 @@ namespace SimpleThx.Services
 
         }
 
+        public string CountUsersDatabase()
+        {
+            string numberOfUsers = null;
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query = (from e in ctx.Accounts
+                             select e.UserID).Count();
+
+
+            }
+
+            return numberOfUsers;
+        }
+
 
     } // END Account Info Service
 } // END NameSpace

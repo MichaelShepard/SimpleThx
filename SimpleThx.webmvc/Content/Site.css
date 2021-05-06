@@ -1,6 +1,7 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    height: 100vh;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,10 +22,10 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 
-select,
+/*select,
 textarea {
-    max-width: 280px;
-}
+    max-width: 100%;
+} */
 
 section {
     padding: 60px 0;
@@ -46,6 +47,8 @@ section {
         padding-bottom: 20px;
         position: relative;
     }
+
+
 
 
 /* playfair-display-regular - latin */
@@ -99,6 +102,15 @@ section {
     url('../fonts/roboto-v27-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
     url('../fonts/roboto-v27-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
 }
+
+
+/*--------------------------------------------------------------
+# Header Social Links
+--------------------------------------------------------------*/
+#navbarStuff {
+    border-bottom: 2px solid #E76F51;
+}
+
 
 /*--------------------------------------------------------------
 # Header Social Links
@@ -525,6 +537,7 @@ section {
     color: #444444;
     font-size: 14px;
     background: #f7fbfe;
+    border-top: 2px solid #E76F51;
 }
 
     #footer .credits {
@@ -624,3 +637,257 @@ section {
 *, *:focus, *:hover {
     outline: none;
 }
+
+
+
+
+/*--------------------------------------------------------------
+# Posts Page
+--------------------------------------------------------------*/
+
+#posts {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #posts h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+/*--------------------------------------------------------------
+# Comments Page
+--------------------------------------------------------------*/
+
+#comments {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #comments h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+/*--------------------------------------------------------------
+# Friends Page
+--------------------------------------------------------------*/
+
+#friends {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #friends h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+    #friends a {
+        font-family: Elsie;
+        color: #264653;
+        font-size: 30px;
+        text-decoration: none;
+    }
+
+        #friends a:hover {
+            color: #2A9D8F;
+        }
+
+#find-friends .btn-outline-secondary {
+    border-color: #E76F51;
+    background-color: #2A9D8F;
+    color: #fff;
+}
+
+    #find-friends .btn-outline-secondary:hover {
+        border-color: #2A9D8F;
+        background-color: #E76F51;
+        color: #fff;
+    }
+
+/*--------------------------------------------------------------
+# Create Post Section
+--------------------------------------------------------------*/
+
+#create-post {
+    font-size: 18px;
+    background: #fff;
+    font-family: Roboto;
+}
+
+    #create-post h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+    #create-post a {
+        color: #264653;
+    }
+
+    #create-post input {
+        font-family: Roboto;
+        font-size: 15px;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+        #create-post input:focus {
+            border: 2px solid #E76F51;
+        }
+
+    #create-post textarea {
+        width: 100%;
+        font-family: Roboto;
+        color: #6c757d;
+        font-size: 15px;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+        padding-top: 5px;
+        padding-left: 10px;
+    }
+
+        #create-post textarea:focus {
+            border: 2px solid #E76F51;
+        }
+
+/*--------------------------------------------------------------
+# Create Post Section
+--------------------------------------------------------------*/
+
+#create-comment {
+    font-size: 18px;
+    background: #fff;
+    font-family: Roboto;
+}
+
+    #create-comment h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+    #create-comment a {
+        color: #264653;
+    }
+
+    #create-comment input {
+        font-family: Roboto;
+        font-size: 15px;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+        #create-comment input:focus {
+            border: 2px solid #E76F51;
+        }
+
+    #create-comment textarea {
+        width: 100%;
+        font-family: Roboto;
+        color: #6c757d;
+        font-size: 15px;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #dee2e6;
+        padding-top: 5px;
+        padding-left: 10px;
+    }
+
+        #create-comment textarea:focus {
+            border: 2px solid #E76F51;
+        }
+
+/*--------------------------------------------------------------
+# AccountInfo Page
+--------------------------------------------------------------*/
+
+#account-info {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #account-info h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+/*--------------------------------------------------------------
+# Create Account Info Section
+--------------------------------------------------------------*/
+
+#account-info-create {
+    font-size: 18px;
+    background: #fff;
+    font-family: Roboto;
+}
+
+#account-info-edit h2 {
+    font-family: Elsie;
+    color: #E76F51;
+    font-size: 50px;
+}
+
+#account-info-edit a {
+    color: #264653;
+}
+
+#account-info-edit input {
+    font-family: Roboto;
+    font-size: 15px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+    #account-info-edit input:focus {
+        border: 2px solid #E76F51;
+    }
+
+/*--------------------------------------------------------------
+# Image Upload Section
+--------------------------------------------------------------*/
+
+
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+/*--------------------------------------------------------------
+# Update Account Page
+--------------------------------------------------------------*/
+
+#change-password {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #change-password h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
