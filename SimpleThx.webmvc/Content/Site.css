@@ -1,5 +1,7 @@
 ﻿body {
-    
+    height: 100vh;
+    padding: 0px !important;
+    margin: 0px !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -106,8 +108,7 @@ section {
 # Header Social Links
 --------------------------------------------------------------*/
 #navbarStuff {
-    border-bottom: 2px solid #E76F51; 
-
+    border-bottom: 2px solid #E76F51;
 }
 
 
@@ -647,10 +648,72 @@ section {
 #posts {
     background: #fff;
     font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 }
 
-#posts h2 {
-    font-family: Elsie;
-    color: #E76F51;
-    font-size: 50px;
+    #posts h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+/*--------------------------------------------------------------
+# Posts Page
+--------------------------------------------------------------*/
+
+#comments {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #comments h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+/*--------------------------------------------------------------
+# Friends Page
+--------------------------------------------------------------*/
+
+#friends {
+    background: #fff;
+    font-family: Roboto;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+    #friends h2 {
+        font-family: Elsie;
+        color: #E76F51;
+        font-size: 50px;
+    }
+
+    #friends a {
+        font-family: Elsie;
+        color: #264653;
+        font-size: 30px;
+        text-decoration: none;
+    }
+
+        #friends a:hover {
+            color: #2A9D8F;
+        }
+
+#find-friends .btn-outline-secondary {
+    border-color: #E76F51;
+    background-color: #2A9D8F;
+    color: #fff;
+}
+
+#find-friends .btn-outline-secondary:hover {
+    border-color: #2A9D8F;
+    background-color: #E76F51;
+    color: #fff;
 }

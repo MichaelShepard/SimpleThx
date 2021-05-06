@@ -3,108 +3,119 @@
 @{
     ViewBag.Title = "Index";
 }
-<br />
-<h2>Friends</h2>
-<br />
-<p>
-    @Html.ActionLink("Find Friends", "SearchForFriends")
-</p>
 
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="alert alert-success fade in" role="alert">
+<Section id="friends">
+    <div class="container">
 
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
+        <div id="find-friends"class="container">
+            <div class="row">
+                <div class="col-8">
+                    <h2>My Friends</h2>
+                </div>
+                <div class="col-4 text-right">
+                    <input class="btn btn-outline-secondary centered mb-2 mt-2" type="button" value="Find Friends" onclick="location.href='@Html.Raw(@Url.Action("SearchForFriends", "Friend"))'" />
+                </div>
+            </div>
+        </div>
+
+
+        @if (TempData.ContainsKey("SaveResult"))
+        {
+            <div class="alert alert-success fade in" role="alert">
+
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                @TempData["SaveResult"]
+            </div>
+        }
+
+        <table class="table table-hover table-responsive-md">
+            <thead class="table-borderless">
+                <tr class="table-borderless">
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.State)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateUTC)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        @Html.HiddenFor(modelItem => item.FriendID)
+                        @Html.HiddenFor(modelItem => item.FriendSend)
+                        @Html.HiddenFor(modelItem => item.FriendReceive)
+                        @Html.HiddenFor(modelItem => item.UserID)
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateUTC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+
+
+
+                        <td>
+
+                            @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
+                            {
+                                <input class="btn btn-outline-secondary centered btn btn-light" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 1 }))'" />
+
+                            }
+                            else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
+                            {
+
+                            }
+
+                        </td>
+                        <td>
+
+                            @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
+                            {
+                                <input class="btn btn-outline-secondary centered" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 2 }))'" />
+                            }
+
+                        </td>
+                        <td>
+
+                            @if (item.Status == SimpleThx.Data.FriendStatus.Accepted && item.FriendSend == item.UserID)
+                            {
+                                <input class="btn btn-outline-secondary centered" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendReceive}))'" />
+                            }
+                            else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
+                            {
+                                <input class="btn btn-outline-secondary centered" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendSend}))'" />
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-}
-
-<table class="table">
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUTC)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-
-        
-    </tr>
-
-    @foreach (var item in Model)
-    {
-<tr>
-
-    @Html.HiddenFor(modelItem => item.FriendID)
-    @Html.HiddenFor(modelItem => item.FriendSend)
-    @Html.HiddenFor(modelItem => item.FriendReceive)
-    @Html.HiddenFor(modelItem => item.UserID)
-
-    <td>
-        @Html.DisplayFor(modelItem => item.FullName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.State)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Country)
-    </td>
-
-
-    <td>
-        @Html.DisplayFor(modelItem => item.CreateUTC)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Status)
-    </td>
-
-
-
-    <td>
-
-        @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
-        {
-            <input type="button" value="Accept" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 1 }))'" />
-
-        }
-        else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
-        {
-
-        }
-
-    </td>
-    <td>
-
-        @if (item.Status == SimpleThx.Data.FriendStatus.Pending && item.FriendReceive == item.UserID)
-        {
-            <input type="button" value="Decline" onclick="location.href='@Html.Raw(@Url.Action("UpdateFriend", "Friend", new { @id = item.FriendID, @status = 2 }))'" />
-        }
-
-    </td>
-    <td>
-
-        @if (item.Status == SimpleThx.Data.FriendStatus.Accepted && item.FriendSend == item.UserID)
-        {
-            <input type="button" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendReceive}))'" />
-        }
-        else if (item.Status == SimpleThx.Data.FriendStatus.Accepted)
-        {
-            <input type="button" value="Post" onclick="location.href='@Html.Raw(@Url.Action("CreatePost", "Post", new { @id = item.FriendSend}))'" />
-        }
-
-    </td>
-</tr>
-    }
-
-</table>
+</Section>
